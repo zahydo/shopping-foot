@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblPedidoCreateDlg" widgetVar="TblPedidoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePedidos.CreateTblPedidoTitle}">
+            <h:form id="TblPedidoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblPedidoController.selected != null}">
+                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_idPedido}" for="idPedido" />
+                        <p:inputText id="idPedido" value="#{tblPedidoController.selected.idPedido}" title="#{bundlePedidos.CreateTblPedidoTitle_idPedido}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_idPedido}"/>
+                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{tblPedidoController.selected.cantidad}" title="#{bundlePedidos.CreateTblPedidoTitle_cantidad}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_cantidad}"/>
+                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_valorTotal}" for="valorTotal" />
+                        <p:inputText id="valorTotal" value="#{tblPedidoController.selected.valorTotal}" title="#{bundlePedidos.CreateTblPedidoTitle_valorTotal}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_valorTotal}"/>
+                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_domicilio}" for="domicilio" />
+                        <p:inputText id="domicilio" value="#{tblPedidoController.selected.domicilio}" title="#{bundlePedidos.CreateTblPedidoTitle_domicilio}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_domicilio}"/>
+                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_idCliente}" for="idCliente" />
+                        <p:selectOneMenu id="idCliente" value="#{tblPedidoController.selected.idCliente}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_idCliente}">
+                            <f:selectItems value="#{tblClienteController.itemsAvailableSelectOne}"
+                                           var="idClienteItem"
+                                           itemValue="#{idClienteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_idEstado}" for="idEstado" />
+                        <p:selectOneMenu id="idEstado" value="#{tblPedidoController.selected.idEstado}" >
+                            <f:selectItems value="#{tblEstadoController.itemsAvailableSelectOne}"
+                                           var="idEstadoItem"
+                                           itemValue="#{idEstadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_idProducto}" for="idProducto" />
+                        <p:selectOneMenu id="idProducto" value="#{tblPedidoController.selected.idProducto}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_idProducto}">
+                            <f:selectItems value="#{tblProductoController.itemsAvailableSelectOne}"
+                                           var="idProductoItem"
+                                           itemValue="#{idProductoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblPedidoController.create}" value="#{bundlePedidos.Save}" update="display,:TblPedidoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblPedidoCreateDialog');"/>
+                    <p:commandButton value="#{bundlePedidos.Cancel}" onclick="TblPedidoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

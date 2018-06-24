@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblTerminalCreateDlg" widgetVar="TblTerminalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleRecursos.CreateTblTerminalTitle}">
+            <h:form id="TblTerminalCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblTerminalController.selected != null}">
+                        <p:outputLabel value="#{bundleRecursos.CreateTblTerminalLabel_idTerminal}" for="idTerminal" />
+                        <p:inputText id="idTerminal" value="#{tblTerminalController.selected.idTerminal}" title="#{bundleRecursos.CreateTblTerminalTitle_idTerminal}" required="true" requiredMessage="#{bundleRecursos.CreateTblTerminalRequiredMessage_idTerminal}"/>
+                        <p:outputLabel value="#{bundleRecursos.CreateTblTerminalLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{tblTerminalController.selected.nombre}" title="#{bundleRecursos.CreateTblTerminalTitle_nombre}" required="true" requiredMessage="#{bundleRecursos.CreateTblTerminalRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundleRecursos.CreateTblTerminalLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tblTerminalController.selected.descripcion}" title="#{bundleRecursos.CreateTblTerminalTitle_descripcion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblTerminalController.create}" value="#{bundleRecursos.Save}" update="display,:TblTerminalListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblTerminalCreateDialog');"/>
+                    <p:commandButton value="#{bundleRecursos.Cancel}" onclick="TblTerminalCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

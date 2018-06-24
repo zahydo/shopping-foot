@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblCategoriaCreateDlg" widgetVar="TblCategoriaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleIngredientesProductos.CreateTblCategoriaTitle}">
+            <h:form id="TblCategoriaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblCategoriaController.selected != null}">
+                        <p:outputLabel value="#{bundleIngredientesProductos.CreateTblCategoriaLabel_idCategoria}" for="idCategoria" />
+                        <p:inputText id="idCategoria" value="#{tblCategoriaController.selected.idCategoria}" title="#{bundleIngredientesProductos.CreateTblCategoriaTitle_idCategoria}" required="true" requiredMessage="#{bundleIngredientesProductos.CreateTblCategoriaRequiredMessage_idCategoria}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.CreateTblCategoriaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{tblCategoriaController.selected.nombre}" title="#{bundleIngredientesProductos.CreateTblCategoriaTitle_nombre}" required="true" requiredMessage="#{bundleIngredientesProductos.CreateTblCategoriaRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.CreateTblCategoriaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tblCategoriaController.selected.descripcion}" title="#{bundleIngredientesProductos.CreateTblCategoriaTitle_descripcion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblCategoriaController.create}" value="#{bundleIngredientesProductos.Save}" update="display,:TblCategoriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblCategoriaCreateDialog');"/>
+                    <p:commandButton value="#{bundleIngredientesProductos.Cancel}" onclick="TblCategoriaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

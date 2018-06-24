@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblIngredienteProductoEditDlg" widgetVar="TblIngredienteProductoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleIngredientesProductos.EditTblIngredienteProductoTitle}">
+            <h:form id="TblIngredienteProductoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblIngredienteProductoController.selected != null}">
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblIngredienteProductoLabel_idIngredienteProducto}" for="idIngredienteProducto" />
+                        <p:inputText id="idIngredienteProducto" value="#{tblIngredienteProductoController.selected.idIngredienteProducto}" title="#{bundleIngredientesProductos.EditTblIngredienteProductoTitle_idIngredienteProducto}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblIngredienteProductoRequiredMessage_idIngredienteProducto}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblIngredienteProductoLabel_gramos}" for="gramos" />
+                        <p:inputText id="gramos" value="#{tblIngredienteProductoController.selected.gramos}" title="#{bundleIngredientesProductos.EditTblIngredienteProductoTitle_gramos}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblIngredienteProductoRequiredMessage_gramos}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblIngredienteProductoLabel_idIngrediente}" for="idIngrediente" />
+                        <p:selectOneMenu id="idIngrediente" value="#{tblIngredienteProductoController.selected.idIngrediente}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblIngredienteProductoRequiredMessage_idIngrediente}">
+                            <f:selectItem itemLabel="#{bundleIngredientesProductos.SelectOneMessage}"/>
+                            <f:selectItems value="#{tblIngredienteController.itemsAvailableSelectOne}"
+                                           var="idIngredienteItem"
+                                           itemValue="#{idIngredienteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblIngredienteProductoLabel_idProducto}" for="idProducto" />
+                        <p:selectOneMenu id="idProducto" value="#{tblIngredienteProductoController.selected.idProducto}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblIngredienteProductoRequiredMessage_idProducto}">
+                            <f:selectItem itemLabel="#{bundleIngredientesProductos.SelectOneMessage}"/>
+                            <f:selectItems value="#{tblProductoController.itemsAvailableSelectOne}"
+                                           var="idProductoItem"
+                                           itemValue="#{idProductoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblIngredienteProductoController.update}" value="#{bundleIngredientesProductos.Save}" update="display,:TblIngredienteProductoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TblIngredienteProductoEditDialog');"/>
+                    <p:commandButton value="#{bundleIngredientesProductos.Cancel}" onclick="TblIngredienteProductoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

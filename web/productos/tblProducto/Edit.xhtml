@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblProductoEditDlg" widgetVar="TblProductoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleIngredientesProductos.EditTblProductoTitle}">
+            <h:form id="TblProductoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblProductoController.selected != null}">
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblProductoLabel_idProducto}" for="idProducto" />
+                        <p:inputText id="idProducto" value="#{tblProductoController.selected.idProducto}" title="#{bundleIngredientesProductos.EditTblProductoTitle_idProducto}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblProductoRequiredMessage_idProducto}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblProductoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{tblProductoController.selected.nombre}" title="#{bundleIngredientesProductos.EditTblProductoTitle_nombre}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblProductoRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblProductoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tblProductoController.selected.descripcion}" title="#{bundleIngredientesProductos.EditTblProductoTitle_descripcion}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblProductoRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblProductoLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{tblProductoController.selected.valor}" title="#{bundleIngredientesProductos.EditTblProductoTitle_valor}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblProductoRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblProductoLabel_disponibles}" for="disponibles" />
+                        <p:inputText id="disponibles" value="#{tblProductoController.selected.disponibles}" title="#{bundleIngredientesProductos.EditTblProductoTitle_disponibles}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblProductoRequiredMessage_disponibles}"/>
+                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblProductoLabel_idCategoria}" for="idCategoria" />
+                        <p:selectOneMenu id="idCategoria" value="#{tblProductoController.selected.idCategoria}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblProductoRequiredMessage_idCategoria}">
+                            <f:selectItem itemLabel="#{bundleIngredientesProductos.SelectOneMessage}"/>
+                            <f:selectItems value="#{tblCategoriaController.itemsAvailableSelectOne}"
+                                           var="idCategoriaItem"
+                                           itemValue="#{idCategoriaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblProductoController.update}" value="#{bundleIngredientesProductos.Save}" update="display,:TblProductoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TblProductoEditDialog');"/>
+                    <p:commandButton value="#{bundleIngredientesProductos.Cancel}" onclick="TblProductoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

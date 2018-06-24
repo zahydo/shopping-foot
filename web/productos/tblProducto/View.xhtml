@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblProductoViewDlg" widgetVar="TblProductoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleIngredientesProductos.ViewTblProductoTitle}">
+            <h:form id="TblProductoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblProductoController.selected != null}">
+                        <h:outputText value="#{bundleIngredientesProductos.ViewTblProductoLabel_idProducto}"/>
+                        <h:outputText value="#{tblProductoController.selected.idProducto}" title="#{bundleIngredientesProductos.ViewTblProductoTitle_idProducto}"/>
+                        <h:outputText value="#{bundleIngredientesProductos.ViewTblProductoLabel_nombre}"/>
+                        <h:outputText value="#{tblProductoController.selected.nombre}" title="#{bundleIngredientesProductos.ViewTblProductoTitle_nombre}"/>
+                        <h:outputText value="#{bundleIngredientesProductos.ViewTblProductoLabel_descripcion}"/>
+                        <h:outputText value="#{tblProductoController.selected.descripcion}" title="#{bundleIngredientesProductos.ViewTblProductoTitle_descripcion}"/>
+                        <h:outputText value="#{bundleIngredientesProductos.ViewTblProductoLabel_valor}"/>
+                        <h:outputText value="#{tblProductoController.selected.valor}" title="#{bundleIngredientesProductos.ViewTblProductoTitle_valor}"/>
+                        <h:outputText value="#{bundleIngredientesProductos.ViewTblProductoLabel_disponibles}"/>
+                        <h:outputText value="#{tblProductoController.selected.disponibles}" title="#{bundleIngredientesProductos.ViewTblProductoTitle_disponibles}"/>
+                        <h:outputText value="#{bundleIngredientesProductos.ViewTblProductoLabel_idCategoria}"/>
+                        <h:outputText value="#{tblProductoController.selected.idCategoria}" title="#{bundleIngredientesProductos.ViewTblProductoTitle_idCategoria}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleIngredientesProductos.Close}" onclick="TblProductoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

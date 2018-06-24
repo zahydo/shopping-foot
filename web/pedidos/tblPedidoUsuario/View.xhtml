@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblPedidoUsuarioViewDlg" widgetVar="TblPedidoUsuarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePedidos.ViewTblPedidoUsuarioTitle}">
+            <h:form id="TblPedidoUsuarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblPedidoUsuarioController.selected != null}">
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoUsuarioLabel_idPedidoUsuario}"/>
+                        <h:outputText value="#{tblPedidoUsuarioController.selected.idPedidoUsuario}" title="#{bundlePedidos.ViewTblPedidoUsuarioTitle_idPedidoUsuario}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoUsuarioLabel_idPedido}"/>
+                        <h:outputText value="#{tblPedidoUsuarioController.selected.idPedido}" title="#{bundlePedidos.ViewTblPedidoUsuarioTitle_idPedido}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoUsuarioLabel_idTerminal}"/>
+                        <h:outputText value="#{tblPedidoUsuarioController.selected.idTerminal}" title="#{bundlePedidos.ViewTblPedidoUsuarioTitle_idTerminal}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoUsuarioLabel_idUsuario}"/>
+                        <h:outputText value="#{tblPedidoUsuarioController.selected.idUsuario}" title="#{bundlePedidos.ViewTblPedidoUsuarioTitle_idUsuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundlePedidos.Close}" onclick="TblPedidoUsuarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

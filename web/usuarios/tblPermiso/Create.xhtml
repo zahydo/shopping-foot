@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblPermisoCreateDlg" widgetVar="TblPermisoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleRolPermisos.CreateTblPermisoTitle}">
+            <h:form id="TblPermisoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblPermisoController.selected != null}">
+                        <p:outputLabel value="#{bundleRolPermisos.CreateTblPermisoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{tblPermisoController.selected.nombre}" title="#{bundleRolPermisos.CreateTblPermisoTitle_nombre}" required="true" requiredMessage="#{bundleRolPermisos.CreateTblPermisoRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundleRolPermisos.CreateTblPermisoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tblPermisoController.selected.descripcion}" title="#{bundleRolPermisos.CreateTblPermisoTitle_descripcion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblPermisoController.create}" value="#{bundleRolPermisos.Save}" update="display,:TblPermisoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblPermisoCreateDialog');"/>
+                    <p:commandButton value="#{bundleRolPermisos.Cancel}" onclick="TblPermisoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

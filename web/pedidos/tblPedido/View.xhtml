@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblPedidoViewDlg" widgetVar="TblPedidoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePedidos.ViewTblPedidoTitle}">
+            <h:form id="TblPedidoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblPedidoController.selected != null}">
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoLabel_idPedido}"/>
+                        <h:outputText value="#{tblPedidoController.selected.idPedido}" title="#{bundlePedidos.ViewTblPedidoTitle_idPedido}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoLabel_cantidad}"/>
+                        <h:outputText value="#{tblPedidoController.selected.cantidad}" title="#{bundlePedidos.ViewTblPedidoTitle_cantidad}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoLabel_valorTotal}"/>
+                        <h:outputText value="#{tblPedidoController.selected.valorTotal}" title="#{bundlePedidos.ViewTblPedidoTitle_valorTotal}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoLabel_domicilio}"/>
+                        <h:outputText value="#{tblPedidoController.selected.domicilio}" title="#{bundlePedidos.ViewTblPedidoTitle_domicilio}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoLabel_idCliente}"/>
+                        <h:outputText value="#{tblPedidoController.selected.idCliente}" title="#{bundlePedidos.ViewTblPedidoTitle_idCliente}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoLabel_idEstado}"/>
+                        <h:outputText value="#{tblPedidoController.selected.idEstado}" title="#{bundlePedidos.ViewTblPedidoTitle_idEstado}"/>
+                        <h:outputText value="#{bundlePedidos.ViewTblPedidoLabel_idProducto}"/>
+                        <h:outputText value="#{tblPedidoController.selected.idProducto}" title="#{bundlePedidos.ViewTblPedidoTitle_idProducto}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundlePedidos.Close}" onclick="TblPedidoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

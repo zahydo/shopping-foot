@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblUsuarioCreateDlg" widgetVar="TblUsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleUsuarios.CreateTblUsuarioTitle}">
+            <h:form id="TblUsuarioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblUsuarioController.selected != null}">
+                        <p:outputLabel value="#{bundleUsuarios.CreateTblUsuarioLabel_idUsuario}" for="idUsuario" />
+                        <p:inputText id="idUsuario" value="#{tblUsuarioController.selected.idUsuario}" title="#{bundleUsuarios.CreateTblUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundleUsuarios.CreateTblUsuarioRequiredMessage_idUsuario}"/>
+                        <p:outputLabel value="#{bundleUsuarios.CreateTblUsuarioLabel_nombreUsuario}" for="nombreUsuario" />
+                        <p:inputText id="nombreUsuario" value="#{tblUsuarioController.selected.nombreUsuario}" title="#{bundleUsuarios.CreateTblUsuarioTitle_nombreUsuario}" required="true" requiredMessage="#{bundleUsuarios.CreateTblUsuarioRequiredMessage_nombreUsuario}"/>
+                        <p:outputLabel value="#{bundleUsuarios.CreateTblUsuarioLabel_contrasena}" for="contrasena" />
+                        <p:inputText id="contrasena" value="#{tblUsuarioController.selected.contrasena}" title="#{bundleUsuarios.CreateTblUsuarioTitle_contrasena}" required="true" requiredMessage="#{bundleUsuarios.CreateTblUsuarioRequiredMessage_contrasena}"/>
+                        <p:outputLabel value="#{bundleUsuarios.CreateTblUsuarioLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{tblUsuarioController.selected.nombre}" title="#{bundleUsuarios.CreateTblUsuarioTitle_nombre}" required="true" requiredMessage="#{bundleUsuarios.CreateTblUsuarioRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundleUsuarios.CreateTblUsuarioLabel_idRol}" for="idRol" />
+                        <p:selectOneMenu id="idRol" value="#{tblUsuarioController.selected.idRol}" required="true" requiredMessage="#{bundleUsuarios.EditTblUsuarioRequiredMessage_idRol}">
+                            <f:selectItems value="#{tblRolController.itemsAvailableSelectOne}"
+                                           var="idRolItem"
+                                           itemValue="#{idRolItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblUsuarioController.create}" value="#{bundleUsuarios.Save}" update="display,:TblUsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblUsuarioCreateDialog');"/>
+                    <p:commandButton value="#{bundleUsuarios.Cancel}" onclick="TblUsuarioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
