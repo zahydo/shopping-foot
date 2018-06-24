@@ -45,9 +45,7 @@ public class TblUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_USUARIO", nullable = false, precision = 38, scale = 0)
+    @Column(name = "ID_USUARIO", nullable = true, precision = 38, scale = 0)
     private BigDecimal idUsuario;
     @Basic(optional = false)
     @NotNull

@@ -12,8 +12,6 @@
             <h:form id="TblTerminalEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblTerminalController.selected != null}">
-                        <p:outputLabel value="#{bundleRecursos.EditTblTerminalLabel_idTerminal}" for="idTerminal" />
-                        <p:inputText id="idTerminal" value="#{tblTerminalController.selected.idTerminal}" title="#{bundleRecursos.EditTblTerminalTitle_idTerminal}" required="true" requiredMessage="#{bundleRecursos.EditTblTerminalRequiredMessage_idTerminal}"/>
                         <p:outputLabel value="#{bundleRecursos.EditTblTerminalLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tblTerminalController.selected.nombre}" title="#{bundleRecursos.EditTblTerminalTitle_nombre}" required="true" requiredMessage="#{bundleRecursos.EditTblTerminalRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundleRecursos.EditTblTerminalLabel_descripcion}" for="descripcion" />

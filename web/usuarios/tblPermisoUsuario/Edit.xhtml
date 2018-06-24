@@ -12,8 +12,6 @@
             <h:form id="TblPermisoUsuarioEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblPermisoUsuarioController.selected != null}">
-                        <p:outputLabel value="#{bundleUsuarios.EditTblPermisoUsuarioLabel_idPermisoUsuario}" for="idPermisoUsuario" />
-                        <p:inputText id="idPermisoUsuario" value="#{tblPermisoUsuarioController.selected.idPermisoUsuario}" title="#{bundleUsuarios.EditTblPermisoUsuarioTitle_idPermisoUsuario}" required="true" requiredMessage="#{bundleUsuarios.EditTblPermisoUsuarioRequiredMessage_idPermisoUsuario}"/>
                         <p:outputLabel value="#{bundleUsuarios.EditTblPermisoUsuarioLabel_idPermiso}" for="idPermiso" />
                         <p:selectOneMenu id="idPermiso" value="#{tblPermisoUsuarioController.selected.idPermiso}" >
                             <f:selectItem itemLabel="#{bundleUsuarios.SelectOneMessage}"/>

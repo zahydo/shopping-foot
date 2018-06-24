@@ -12,8 +12,6 @@
             <h:form id="TblPedidoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblPedidoController.selected != null}">
-                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_idPedido}" for="idPedido" />
-                        <p:inputText id="idPedido" value="#{tblPedidoController.selected.idPedido}" title="#{bundlePedidos.CreateTblPedidoTitle_idPedido}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_idPedido}"/>
                         <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_cantidad}" for="cantidad" />
                         <p:inputText id="cantidad" value="#{tblPedidoController.selected.cantidad}" title="#{bundlePedidos.CreateTblPedidoTitle_cantidad}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_cantidad}"/>
                         <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_valorTotal}" for="valorTotal" />

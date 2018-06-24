@@ -12,8 +12,6 @@
             <h:form id="TblCategoriaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblCategoriaController.selected != null}">
-                        <p:outputLabel value="#{bundleIngredientesProductos.EditTblCategoriaLabel_idCategoria}" for="idCategoria" />
-                        <p:inputText id="idCategoria" value="#{tblCategoriaController.selected.idCategoria}" title="#{bundleIngredientesProductos.EditTblCategoriaTitle_idCategoria}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblCategoriaRequiredMessage_idCategoria}"/>
                         <p:outputLabel value="#{bundleIngredientesProductos.EditTblCategoriaLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tblCategoriaController.selected.nombre}" title="#{bundleIngredientesProductos.EditTblCategoriaTitle_nombre}" required="true" requiredMessage="#{bundleIngredientesProductos.EditTblCategoriaRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundleIngredientesProductos.EditTblCategoriaLabel_descripcion}" for="descripcion" />

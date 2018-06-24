@@ -12,8 +12,6 @@
             <h:form id="TblUsuarioCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblUsuarioController.selected != null}">
-                        <p:outputLabel value="#{bundleUsuarios.CreateTblUsuarioLabel_idUsuario}" for="idUsuario" />
-                        <p:inputText id="idUsuario" value="#{tblUsuarioController.selected.idUsuario}" title="#{bundleUsuarios.CreateTblUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundleUsuarios.CreateTblUsuarioRequiredMessage_idUsuario}"/>
                         <p:outputLabel value="#{bundleUsuarios.CreateTblUsuarioLabel_nombreUsuario}" for="nombreUsuario" />
                         <p:inputText id="nombreUsuario" value="#{tblUsuarioController.selected.nombreUsuario}" title="#{bundleUsuarios.CreateTblUsuarioTitle_nombreUsuario}" required="true" requiredMessage="#{bundleUsuarios.CreateTblUsuarioRequiredMessage_nombreUsuario}"/>
                         <p:outputLabel value="#{bundleUsuarios.CreateTblUsuarioLabel_contrasena}" for="contrasena" />

@@ -12,8 +12,6 @@
             <h:form id="TblIngredienteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblIngredienteController.selected != null}">
-                        <p:outputLabel value="#{bundleIngredientesProductos.CreateTblIngredienteLabel_idIngrediente}" for="idIngrediente" />
-                        <p:inputText id="idIngrediente" value="#{tblIngredienteController.selected.idIngrediente}" title="#{bundleIngredientesProductos.CreateTblIngredienteTitle_idIngrediente}" required="true" requiredMessage="#{bundleIngredientesProductos.CreateTblIngredienteRequiredMessage_idIngrediente}"/>
                         <p:outputLabel value="#{bundleIngredientesProductos.CreateTblIngredienteLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tblIngredienteController.selected.nombre}" title="#{bundleIngredientesProductos.CreateTblIngredienteTitle_nombre}" required="true" requiredMessage="#{bundleIngredientesProductos.CreateTblIngredienteRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundleIngredientesProductos.CreateTblIngredienteLabel_descripcion}" for="descripcion" />

@@ -12,8 +12,6 @@
             <h:form id="TblClienteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblClienteController.selected != null}">
-                        <p:outputLabel value="#{bundlePedidos.CreateTblClienteLabel_idCliente}" for="idCliente" />
-                        <p:inputText id="idCliente" value="#{tblClienteController.selected.idCliente}" title="#{bundlePedidos.CreateTblClienteTitle_idCliente}" required="true" requiredMessage="#{bundlePedidos.CreateTblClienteRequiredMessage_idCliente}"/>
                         <p:outputLabel value="#{bundlePedidos.CreateTblClienteLabel_identificacion}" for="identificacion" />
                         <p:inputText id="identificacion" value="#{tblClienteController.selected.identificacion}" title="#{bundlePedidos.CreateTblClienteTitle_identificacion}" required="true" requiredMessage="#{bundlePedidos.CreateTblClienteRequiredMessage_identificacion}"/>
                         <p:outputLabel value="#{bundlePedidos.CreateTblClienteLabel_email}" for="email" />

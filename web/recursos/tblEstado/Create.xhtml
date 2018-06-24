@@ -12,8 +12,6 @@
             <h:form id="TblEstadoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblEstadoController.selected != null}">
-                        <p:outputLabel value="#{bundleRecursos.CreateTblEstadoLabel_idEstado}" for="idEstado" />
-                        <p:inputText id="idEstado" value="#{tblEstadoController.selected.idEstado}" title="#{bundleRecursos.CreateTblEstadoTitle_idEstado}" required="true" requiredMessage="#{bundleRecursos.CreateTblEstadoRequiredMessage_idEstado}"/>
                         <p:outputLabel value="#{bundleRecursos.CreateTblEstadoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tblEstadoController.selected.nombre}" title="#{bundleRecursos.CreateTblEstadoTitle_nombre}" required="true" requiredMessage="#{bundleRecursos.CreateTblEstadoRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundleRecursos.CreateTblEstadoLabel_descripcion}" for="descripcion" />

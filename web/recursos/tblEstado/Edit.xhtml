@@ -12,8 +12,6 @@
             <h:form id="TblEstadoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblEstadoController.selected != null}">
-                        <p:outputLabel value="#{bundleRecursos.EditTblEstadoLabel_idEstado}" for="idEstado" />
-                        <p:inputText id="idEstado" value="#{tblEstadoController.selected.idEstado}" title="#{bundleRecursos.EditTblEstadoTitle_idEstado}" required="true" requiredMessage="#{bundleRecursos.EditTblEstadoRequiredMessage_idEstado}"/>
                         <p:outputLabel value="#{bundleRecursos.EditTblEstadoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tblEstadoController.selected.nombre}" title="#{bundleRecursos.EditTblEstadoTitle_nombre}" required="true" requiredMessage="#{bundleRecursos.EditTblEstadoRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundleRecursos.EditTblEstadoLabel_descripcion}" for="descripcion" />

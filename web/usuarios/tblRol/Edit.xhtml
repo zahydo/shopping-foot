@@ -12,8 +12,6 @@
             <h:form id="TblRolEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblRolController.selected != null}">
-                        <p:outputLabel value="#{bundleRolPermisos.EditTblRolLabel_idRol}" for="idRol" />
-                        <p:inputText id="idRol" value="#{tblRolController.selected.idRol}" title="#{bundleRolPermisos.EditTblRolTitle_idRol}" required="true" requiredMessage="#{bundleRolPermisos.EditTblRolRequiredMessage_idRol}"/>
                         <p:outputLabel value="#{bundleRolPermisos.EditTblRolLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tblRolController.selected.nombre}" title="#{bundleRolPermisos.EditTblRolTitle_nombre}" required="true" requiredMessage="#{bundleRolPermisos.EditTblRolRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundleRolPermisos.EditTblRolLabel_descripcion}" for="descripcion" />

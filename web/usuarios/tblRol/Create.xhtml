@@ -12,8 +12,6 @@
             <h:form id="TblRolCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblRolController.selected != null}">
-                        <p:outputLabel value="#{bundleRolPermisos.CreateTblRolLabel_idRol}" for="idRol" />
-                        <p:inputText id="idRol" value="#{tblRolController.selected.idRol}" title="#{bundleRolPermisos.CreateTblRolTitle_idRol}" required="true" requiredMessage="#{bundleRolPermisos.CreateTblRolRequiredMessage_idRol}"/>
                         <p:outputLabel value="#{bundleRolPermisos.CreateTblRolLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tblRolController.selected.nombre}" title="#{bundleRolPermisos.CreateTblRolTitle_nombre}" required="true" requiredMessage="#{bundleRolPermisos.CreateTblRolRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundleRolPermisos.CreateTblRolLabel_descripcion}" for="descripcion" />

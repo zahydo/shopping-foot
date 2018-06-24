@@ -35,9 +35,7 @@ public class TblProductoTienda implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_PRODUCTO_TIENDA", nullable = false, precision = 38, scale = 0)
+    @Column(name = "ID_PRODUCTO_TIENDA", nullable = true, precision = 38, scale = 0)
     private BigDecimal idProductoTienda;
     @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "ID_PRODUCTO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

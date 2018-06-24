@@ -12,8 +12,6 @@
             <h:form id="TblTerminalCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblTerminalController.selected != null}">
-                        <p:outputLabel value="#{bundleRecursos.CreateTblTerminalLabel_idTerminal}" for="idTerminal" />
-                        <p:inputText id="idTerminal" value="#{tblTerminalController.selected.idTerminal}" title="#{bundleRecursos.CreateTblTerminalTitle_idTerminal}" required="true" requiredMessage="#{bundleRecursos.CreateTblTerminalRequiredMessage_idTerminal}"/>
                         <p:outputLabel value="#{bundleRecursos.CreateTblTerminalLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tblTerminalController.selected.nombre}" title="#{bundleRecursos.CreateTblTerminalTitle_nombre}" required="true" requiredMessage="#{bundleRecursos.CreateTblTerminalRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundleRecursos.CreateTblTerminalLabel_descripcion}" for="descripcion" />

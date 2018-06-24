@@ -12,8 +12,6 @@
             <h:form id="TblProductoTiendaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblProductoTiendaController.selected != null}">
-                        <p:outputLabel value="#{bundleTienda.EditTblProductoTiendaLabel_idProductoTienda}" for="idProductoTienda" />
-                        <p:inputText id="idProductoTienda" value="#{tblProductoTiendaController.selected.idProductoTienda}" title="#{bundleTienda.EditTblProductoTiendaTitle_idProductoTienda}" required="true" requiredMessage="#{bundleTienda.EditTblProductoTiendaRequiredMessage_idProductoTienda}"/>
                         <p:outputLabel value="#{bundleTienda.EditTblProductoTiendaLabel_idProducto}" for="idProducto" />
                         <p:selectOneMenu id="idProducto" value="#{tblProductoTiendaController.selected.idProducto}" required="true" requiredMessage="#{bundleTienda.EditTblProductoTiendaRequiredMessage_idProducto}">
                             <f:selectItem itemLabel="#{bundleTienda.SelectOneMessage}"/>
