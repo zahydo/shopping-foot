@@ -31,13 +31,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundleUsuarios.ListTblPermisoUsuarioTitle_idPermiso}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPermiso}"/>
+                            <h:outputText value="#{item.idPermiso.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleUsuarios.ListTblPermisoUsuarioTitle_idUsuario}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idUsuario}"/>
+                            <h:outputText value="#{item.idUsuario.nombreUsuario}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleUsuarios.Create}" actionListener="#{tblPermisoUsuarioController.prepareCreate}" update=":TblPermisoUsuarioCreateForm" oncomplete="PF('TblPermisoUsuarioCreateDialog').show()"/>

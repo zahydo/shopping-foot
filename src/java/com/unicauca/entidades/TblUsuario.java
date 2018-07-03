@@ -49,18 +49,18 @@ public class TblUsuario implements Serializable {
     private BigDecimal idUsuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "NOMBRE_USUARIO", nullable = false, length = 20)
+    @Size(min = 1, max = 50)
+    @Column(name = "NOMBRE_USUARIO", nullable = false, length = 50)
     private String nombreUsuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "CONTRASENA", nullable = false, length = 20)
+    @Size(min = 1, max = 50)
+    @Column(name = "CONTRASENA", nullable = false, length = 50)
     private String contrasena;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "NOMBRE", nullable = false, length = 20)
+    @Column(name = "NOMBRE", nullable = false, length = 50)
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
     private List<TblPermisoUsuario> tblPermisoUsuarioList;

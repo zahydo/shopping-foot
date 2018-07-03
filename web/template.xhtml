@@ -23,30 +23,32 @@
             <p:layoutUnit position="west" size="200" header="Opciones" resizable="true" closable="true" collapsible="true">
                 <h:form id="menuForm">
                     <p:panelMenu >
-                        <p:submenu label="#{bundle.Configuracion}">
-                            <p:menuitem value="Gestión de Estados" outcome="/recursos/tblEstado/List.xhtml" />
-                            <p:menuitem value="Gestión de Terminales" outcome="/recursos/tblTerminal/List.xhtml" />
+                        <p:submenu label="#{bundle.Configuracion}"
+                                   rendered="#{userSession.sesionIniciada} and #{userSession.esAdmin}"
+                                   >
+                            <p:menuitem value="Gestión de Estados" outcome="/admin/recursos/tblEstado/List.xhtml" />
+                            <p:menuitem value="Gestión de Terminales" outcome="/admin/recursos/tblTerminal/List.xhtml" />
                         </p:submenu>
                         <p:submenu label="#{bundle.Pedidos}">
-                            <p:menuitem value="Gestión de Clientes" outcome="/pedidos/tblCliente/List.xhtml" />
-                            <p:menuitem value="Gestión de Pedidos" outcome="/pedidos/tblPedido/List.xhtml" />
-                            <p:menuitem value="Pedidos por Usuario" outcome="/pedidos/tblPedidoUsuario/List.xhtml" />
+                            <p:menuitem value="Gestión de Clientes" outcome="/user/pedidos/tblCliente/List.xhtml" />
+                            <p:menuitem value="Gestión de Pedidos" outcome="/user/pedidos/tblPedido/List.xhtml" />
+                            <p:menuitem value="Pedidos por Usuario" outcome="/user/pedidos/tblPedidoUsuario/List.xhtml" />
                         </p:submenu>
                         <p:submenu label="#{bundle.Productos}">
-                            <p:menuitem value="Categorías de productos" outcome="/productos/tblCategoria/List.xhtml" />
-                            <p:menuitem value="Gestión de Productos" outcome="/productos/tblProducto/List.xhtml" />
-                            <p:menuitem value="Gestión de Ingredientes" outcome="/productos/tblIngrediente/List.xhtml" />
-                            <p:menuitem value="Preparación de productos" outcome="/productos/tblIngredienteProducto/List.xhtml" />
+                            <p:menuitem value="Categorías de productos" outcome="/common/productos/tblCategoria/List.xhtml" />
+                            <p:menuitem value="Gestión de Productos" outcome="/common/productos/tblProducto/List.xhtml" />
+                            <p:menuitem value="Gestión de Ingredientes" outcome="/common/productos/tblIngrediente/List.xhtml" />
+                            <p:menuitem value="Preparación de productos" outcome="/common/productos/tblIngredienteProducto/List.xhtml" />
                         </p:submenu>
                         <p:submenu label="#{bundle.Tienda}">
-                            <p:menuitem value="Gestionar Tiendas" outcome="/tienda/tblTienda/List.xhtml" />
-                            <p:menuitem value="Inventario de tiendas" outcome="/tienda/tblProductoTienda/List.xhtml" />
+                            <p:menuitem value="Gestionar Tiendas" outcome="/admin/tienda/tblTienda/List.xhtml" />
+                            <p:menuitem value="Inventario de tiendas" outcome="/admin/tienda/tblProductoTienda/List.xhtml" />
                         </p:submenu>
                         <p:submenu label="#{bundle.Usuarios}">
-                            <p:menuitem value="Gestión de Permisos" outcome="/usuarios/tblPermiso/List.xhtml" />
-                            <p:menuitem value="Gestión de Roles" outcome="/usuarios/tblRol/List.xhtml" />
-                            <p:menuitem value="Gestión de Usuarios" outcome="/usuarios/tblUsuario/List.xhtml" />
-                            <p:menuitem value="Permisos por usuario" outcome="/usuarios/tblPermisoUsuario/List.xhtml" />
+                            <p:menuitem value="Gestión de Permisos" outcome="/admin/usuarios/tblPermiso/List.xhtml" />
+                            <p:menuitem value="Gestión de Roles" outcome="/admin/usuarios/tblRol/List.xhtml" />
+                            <p:menuitem value="Gestión de Usuarios" outcome="/admin/usuarios/tblUsuario/List.xhtml" />
+                            <p:menuitem value="Permisos por usuario" outcome="/admin/usuarios/tblPermisoUsuario/List.xhtml" />
                         </p:submenu>
                     </p:panelMenu>
                 </h:form>

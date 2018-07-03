@@ -33,4 +33,11 @@
             <var>bundlePedidos</var>
         </resource-bundle>
     </application>
+   <managed-bean>
+        <description>Controller to manage the user session</description>
+        <managed-bean-name>userSession</managed-bean-name>
+        <managed-bean-class>com.unicauca.web.usuarios.UserSessionController</managed-bean-class>
+    
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

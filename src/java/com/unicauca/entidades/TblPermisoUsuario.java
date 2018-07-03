@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -43,6 +44,11 @@ public class TblPermisoUsuario implements Serializable {
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TblUsuario idUsuario;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "NOMBRE_USUARIO", nullable = false, length = 30)
+    private String nombreUsuario;
 
     public TblPermisoUsuario() {
     }
@@ -75,6 +81,14 @@ public class TblPermisoUsuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -97,7 +111,7 @@ public class TblPermisoUsuario implements Serializable {
 
     @Override
     public String toString() {
-        return idPermiso+ " - " + idUsuario.getNombre();
+        return idPermiso + " - " + idUsuario.getNombre();
     }
-    
+
 }
