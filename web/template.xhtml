@@ -15,11 +15,6 @@
 
         <p:growl id="growl" life="3000" />
         <p:layout fullPage="true">
-
-            <p:layoutUnit position="north" size="80" header="Shopping foot" resizable="true">
-                <ui:insert name="breadcump"/>
-            </p:layoutUnit>
-
             <p:layoutUnit position="west" size="200" header="Opciones" resizable="true" closable="true" collapsible="true">
                 <h:form id="menuForm">
                     <p:panelMenu >
@@ -60,10 +55,6 @@
             -->
             <p:layoutUnit position="center">
                 <ui:insert name="body"/>
-            </p:layoutUnit>
-
-            <p:layoutUnit position="south" size="50" resizable="true" closable="true" collapsible="true">
-                <ui:insert name="footer"/>
             </p:layoutUnit>
 
         </p:layout>

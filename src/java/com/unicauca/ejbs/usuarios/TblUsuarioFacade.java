@@ -6,17 +6,19 @@
 package com.unicauca.ejbs.usuarios;
 
 import com.unicauca.ejbs.AbstractFacade;
+import com.unicauca.ejbs.LoginDao;
 import com.unicauca.entidades.TblUsuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author sahydo
  */
 @Stateless
-public class TblUsuarioFacade extends AbstractFacade<TblUsuario> {
+public class TblUsuarioFacade extends AbstractFacade<TblUsuario> implements LoginDao {
 
     @PersistenceContext(unitName = "shoppingPU")
     private EntityManager em;
@@ -28,6 +30,15 @@ public class TblUsuarioFacade extends AbstractFacade<TblUsuario> {
 
     public TblUsuarioFacade() {
         super(TblUsuario.class);
+    }
+
+    @Override
+    public boolean validate(String user, String password) {
+        TypedQuery<TblUsuario> query = em.createNamedQuery(TblUsuario.VALIDATE_USER, TblUsuario.class);
+        query.setParameter("username", user);
+        query.setParameter("contrasena", password);
+        TblUsuario usuario = query.getSingleResult();
+        return usuario != null;
     }
     
 }

@@ -4,6 +4,7 @@ import com.unicauca.entidades.TblUsuario;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
 import com.unicauca.ejbs.usuarios.TblUsuarioFacade;
+import com.unicauca.web.util.SessionUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,22 +13,50 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpSession;
 
 @Named("tblUsuarioController")
-@ApplicationScoped
-public class TblUsuarioController implements Serializable {
+@SessionScoped
+public class TblUsuarioController implements Serializable{
 
     @EJB
     private com.unicauca.ejbs.usuarios.TblUsuarioFacade ejbFacade;
     private List<TblUsuario> items = null;
     private TblUsuario selected;
+    private String pwd;
+    private String msg;
+    private String user;
+    
+    public String getPwd() {
+        return pwd;
+    }
 
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
     public TblUsuarioController() {
     }
 
@@ -162,4 +191,25 @@ public class TblUsuarioController implements Serializable {
 
     }
 
+    /**
+     *
+     * @param user
+     * @param password
+     * @return
+     */
+    public String validateUsernamePassword() {
+        boolean valid = getFacade().validate(user, pwd);
+        if (valid) {
+            HttpSession session = SessionUtils.getSession();
+            session.setAttribute("username", user);
+            return "admin";
+        } else {
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Incorrect Username and Passowrd",
+                            "Please enter correct username and Password"));
+            return "login";
+        }
+    }
 }

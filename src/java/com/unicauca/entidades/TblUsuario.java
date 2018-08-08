@@ -39,10 +39,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "TblUsuario.findByIdUsuario", query = "SELECT t FROM TblUsuario t WHERE t.idUsuario = :idUsuario")
     , @NamedQuery(name = "TblUsuario.findByNombreUsuario", query = "SELECT t FROM TblUsuario t WHERE t.nombreUsuario = :nombreUsuario")
     , @NamedQuery(name = "TblUsuario.findByContrasena", query = "SELECT t FROM TblUsuario t WHERE t.contrasena = :contrasena")
+    , @NamedQuery(name = TblUsuario.VALIDATE_USER, query = "SELECT t FROM TblUsuario t WHERE t.nombreUsuario = :username AND t.contrasena = :contrasena")
     , @NamedQuery(name = "TblUsuario.findByNombre", query = "SELECT t FROM TblUsuario t WHERE t.nombre = :nombre")})
 public class TblUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final String VALIDATE_USER = "TblUsuario.validateuser";
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_USUARIO", nullable = true, precision = 38, scale = 0)
