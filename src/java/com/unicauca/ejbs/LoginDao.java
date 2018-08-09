@@ -5,10 +5,12 @@
  */
 package com.unicauca.ejbs;
 
+import com.unicauca.entidades.TblUsuario;
+
 /**
  *
  * @author sahydo
  */
 public interface LoginDao {
-    boolean validate(String user, String password);
+    TblUsuario validate(String user, String password);
 }
