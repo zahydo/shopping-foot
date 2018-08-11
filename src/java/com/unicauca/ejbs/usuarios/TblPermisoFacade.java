@@ -6,7 +6,7 @@
 package com.unicauca.ejbs.usuarios;
 
 import com.unicauca.ejbs.AbstractFacade;
-import com.unicauca.entidades.TblPermiso;
+import com.unicauca.entidades.Permiso;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author sahydo
  */
 @Stateless
-public class TblPermisoFacade extends AbstractFacade<TblPermiso> {
+public class TblPermisoFacade extends AbstractFacade<Permiso> {
 
     @PersistenceContext(unitName = "shoppingPU")
     private EntityManager em;
@@ -27,7 +27,7 @@ public class TblPermisoFacade extends AbstractFacade<TblPermiso> {
     }
 
     public TblPermisoFacade() {
-        super(TblPermiso.class);
+        super(Permiso.class);
     }
     
 }

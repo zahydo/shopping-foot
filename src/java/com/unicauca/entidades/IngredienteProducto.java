@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "TBL_INGREDIENTE_PRODUCTO", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblIngredienteProducto.findAll", query = "SELECT t FROM TblIngredienteProducto t")
-    , @NamedQuery(name = "TblIngredienteProducto.findByIdIngredienteProducto", query = "SELECT t FROM TblIngredienteProducto t WHERE t.idIngredienteProducto = :idIngredienteProducto")
-    , @NamedQuery(name = "TblIngredienteProducto.findByGramos", query = "SELECT t FROM TblIngredienteProducto t WHERE t.gramos = :gramos")})
-public class TblIngredienteProducto implements Serializable {
+    @NamedQuery(name = "IngredienteProducto.findAll", query = "SELECT ingPrd FROM IngredienteProducto ingPrd")
+    , @NamedQuery(name = "IngredienteProducto.findByIdIngredienteProducto", query = "SELECT ingPrd FROM IngredienteProducto ingPrd WHERE ingPrd.idIngredienteProducto = :idIngredienteProducto")
+    , @NamedQuery(name = "IngredienteProducto.findByGramos", query = "SELECT ingPrd FROM IngredienteProducto ingPrd WHERE ingPrd.gramos = :gramos")})
+public class IngredienteProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -45,19 +45,19 @@ public class TblIngredienteProducto implements Serializable {
     private BigInteger gramos;
     @JoinColumn(name = "ID_INGREDIENTE", referencedColumnName = "ID_INGREDIENTE", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblIngrediente idIngrediente;
+    private Ingrediente idIngrediente;
     @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "ID_PRODUCTO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblProducto idProducto;
+    private Producto idProducto;
 
-    public TblIngredienteProducto() {
+    public IngredienteProducto() {
     }
 
-    public TblIngredienteProducto(BigDecimal idIngredienteProducto) {
+    public IngredienteProducto(BigDecimal idIngredienteProducto) {
         this.idIngredienteProducto = idIngredienteProducto;
     }
 
-    public TblIngredienteProducto(BigDecimal idIngredienteProducto, BigInteger gramos) {
+    public IngredienteProducto(BigDecimal idIngredienteProducto, BigInteger gramos) {
         this.idIngredienteProducto = idIngredienteProducto;
         this.gramos = gramos;
     }
@@ -78,19 +78,19 @@ public class TblIngredienteProducto implements Serializable {
         this.gramos = gramos;
     }
 
-    public TblIngrediente getIdIngrediente() {
+    public Ingrediente getIdIngrediente() {
         return idIngrediente;
     }
 
-    public void setIdIngrediente(TblIngrediente idIngrediente) {
+    public void setIdIngrediente(Ingrediente idIngrediente) {
         this.idIngrediente = idIngrediente;
     }
 
-    public TblProducto getIdProducto() {
+    public Producto getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(TblProducto idProducto) {
+    public void setIdProducto(Producto idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -104,10 +104,10 @@ public class TblIngredienteProducto implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblIngredienteProducto)) {
+        if (!(object instanceof IngredienteProducto)) {
             return false;
         }
-        TblIngredienteProducto other = (TblIngredienteProducto) object;
+        IngredienteProducto other = (IngredienteProducto) object;
         if ((this.idIngredienteProducto == null && other.idIngredienteProducto != null) || (this.idIngredienteProducto != null && !this.idIngredienteProducto.equals(other.idIngredienteProducto))) {
             return false;
         }

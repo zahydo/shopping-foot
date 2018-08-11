@@ -1,6 +1,6 @@
 package com.unicauca.web.tienda;
 
-import com.unicauca.entidades.TblProductoTienda;
+import com.unicauca.entidades.ProductoTienda;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
 import com.unicauca.ejbs.tienda.TblProductoTiendaFacade;
@@ -25,17 +25,17 @@ public class TblProductoTiendaController implements Serializable {
 
     @EJB
     private com.unicauca.ejbs.tienda.TblProductoTiendaFacade ejbFacade;
-    private List<TblProductoTienda> items = null;
-    private TblProductoTienda selected;
+    private List<ProductoTienda> items = null;
+    private ProductoTienda selected;
 
     public TblProductoTiendaController() {
     }
 
-    public TblProductoTienda getSelected() {
+    public ProductoTienda getSelected() {
         return selected;
     }
 
-    public void setSelected(TblProductoTienda selected) {
+    public void setSelected(ProductoTienda selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class TblProductoTiendaController implements Serializable {
         return ejbFacade;
     }
 
-    public TblProductoTienda prepareCreate() {
-        selected = new TblProductoTienda();
+    public ProductoTienda prepareCreate() {
+        selected = new ProductoTienda();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class TblProductoTiendaController implements Serializable {
         }
     }
 
-    public List<TblProductoTienda> getItems() {
+    public List<ProductoTienda> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class TblProductoTiendaController implements Serializable {
         }
     }
 
-    public TblProductoTienda getTblProductoTienda(java.math.BigDecimal id) {
+    public ProductoTienda getTblProductoTienda(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
 
-    public List<TblProductoTienda> getItemsAvailableSelectMany() {
+    public List<ProductoTienda> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TblProductoTienda> getItemsAvailableSelectOne() {
+    public List<ProductoTienda> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TblProductoTienda.class)
+    @FacesConverter(forClass = ProductoTienda.class)
     public static class TblProductoTiendaControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class TblProductoTiendaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblProductoTienda) {
-                TblProductoTienda o = (TblProductoTienda) object;
+            if (object instanceof ProductoTienda) {
+                ProductoTienda o = (ProductoTienda) object;
                 return getStringKey(o.getIdProductoTienda());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblProductoTienda.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), ProductoTienda.class.getName()});
                 return null;
             }
         }

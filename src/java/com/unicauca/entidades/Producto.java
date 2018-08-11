@@ -6,8 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -34,21 +32,21 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "TBL_PRODUCTO", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblProducto.findAll", query = "SELECT t FROM TblProducto t")
-    , @NamedQuery(name = "TblProducto.findByIdProducto", query = "SELECT t FROM TblProducto t WHERE t.idProducto = :idProducto")
-    , @NamedQuery(name = "TblProducto.findByNombre", query = "SELECT t FROM TblProducto t WHERE t.nombre = :nombre")
-    , @NamedQuery(name = "TblProducto.findByDescripcion", query = "SELECT t FROM TblProducto t WHERE t.descripcion = :descripcion")
-    , @NamedQuery(name = "TblProducto.findByValor", query = "SELECT t FROM TblProducto t WHERE t.valor = :valor")
-    , @NamedQuery(name = "TblProducto.findByDisponibles", query = "SELECT t FROM TblProducto t WHERE t.disponibles = :disponibles")})
-public class TblProducto implements Serializable {
+    @NamedQuery(name = "Producto.findAll", query = "SELECT prod FROM Producto prod")
+    , @NamedQuery(name = "Producto.findByIdProducto", query = "SELECT prod FROM Producto prod WHERE prod.idProducto = :idProducto")
+    , @NamedQuery(name = "Producto.findByNombre", query = "SELECT prod FROM Producto prod WHERE prod.nombre = :nombre")
+    , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT prod FROM Producto prod WHERE prod.descripcion = :descripcion")
+    , @NamedQuery(name = "Producto.findByValor", query = "SELECT prod FROM Producto prod WHERE prod.valor = :valor")
+    , @NamedQuery(name = "Producto.findByDisponibles", query = "SELECT prod FROM Producto prod WHERE prod.disponibles = :disponibles")})
+public class Producto implements Serializable {
 
-    public static final String findAll="TblProducto.findAll";
-    public static final String findByIdProducto="TblProducto.findByIdProducto";
+    public static final String findAll="Producto.findAll";
+    public static final String findByIdProducto="Producto.findByIdProducto";
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_PRODUCTO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idProducto;
+    private Long idProducto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -62,29 +60,29 @@ public class TblProducto implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "VALOR", nullable = false)
-    private BigInteger valor;
+    private Long valor;
     @Basic(optional = false)
     @NotNull
     @Column(name = "DISPONIBLES", nullable = false)
-    private BigInteger disponibles;
+    private Long disponibles;
     @JoinColumn(name = "ID_CATEGORIA", referencedColumnName = "ID_CATEGORIA", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblCategoria idCategoria;
+    private Categoria idCategoria;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto", fetch = FetchType.LAZY)
-    private List<TblProductoTienda> tblProductoTiendaList;
+    private List<ProductoTienda> tblProductoTiendaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto", fetch = FetchType.LAZY)
-    private List<TblIngredienteProducto> tblIngredienteProductoList;
+    private List<IngredienteProducto> tblIngredienteProductoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto", fetch = FetchType.LAZY)
-    private List<TblPedido> tblPedidoList;
+    private List<Pedido> tblPedidoList;
 
-    public TblProducto() {
+    public Producto() {
     }
 
-    public TblProducto(BigDecimal idProducto) {
+    public Producto(Long idProducto) {
         this.idProducto = idProducto;
     }
 
-    public TblProducto(BigDecimal idProducto, String nombre, String descripcion, BigInteger valor, BigInteger disponibles) {
+    public Producto(Long idProducto, String nombre, String descripcion, Long valor, Long disponibles) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -92,11 +90,11 @@ public class TblProducto implements Serializable {
         this.disponibles = disponibles;
     }
 
-    public BigDecimal getIdProducto() {
+    public Long getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(BigDecimal idProducto) {
+    public void setIdProducto(Long idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -116,54 +114,54 @@ public class TblProducto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public BigInteger getValor() {
+    public Long getValor() {
         return valor;
     }
 
-    public void setValor(BigInteger valor) {
+    public void setValor(Long valor) {
         this.valor = valor;
     }
 
-    public BigInteger getDisponibles() {
+    public Long getDisponibles() {
         return disponibles;
     }
 
-    public void setDisponibles(BigInteger disponibles) {
+    public void setDisponibles(Long disponibles) {
         this.disponibles = disponibles;
     }
 
-    public TblCategoria getIdCategoria() {
+    public Categoria getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(TblCategoria idCategoria) {
+    public void setIdCategoria(Categoria idCategoria) {
         this.idCategoria = idCategoria;
     }
 
     @XmlTransient
-    public List<TblProductoTienda> getTblProductoTiendaList() {
+    public List<ProductoTienda> getProductoTiendaList() {
         return tblProductoTiendaList;
     }
 
-    public void setTblProductoTiendaList(List<TblProductoTienda> tblProductoTiendaList) {
+    public void setProductoTiendaList(List<ProductoTienda> tblProductoTiendaList) {
         this.tblProductoTiendaList = tblProductoTiendaList;
     }
 
     @XmlTransient
-    public List<TblIngredienteProducto> getTblIngredienteProductoList() {
+    public List<IngredienteProducto> getTblIngredienteProductoList() {
         return tblIngredienteProductoList;
     }
 
-    public void setTblIngredienteProductoList(List<TblIngredienteProducto> tblIngredienteProductoList) {
+    public void setTblIngredienteProductoList(List<IngredienteProducto> tblIngredienteProductoList) {
         this.tblIngredienteProductoList = tblIngredienteProductoList;
     }
 
     @XmlTransient
-    public List<TblPedido> getTblPedidoList() {
+    public List<Pedido> getTblPedidoList() {
         return tblPedidoList;
     }
 
-    public void setTblPedidoList(List<TblPedido> tblPedidoList) {
+    public void setTblPedidoList(List<Pedido> tblPedidoList) {
         this.tblPedidoList = tblPedidoList;
     }
 
@@ -177,10 +175,10 @@ public class TblProducto implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblProducto)) {
+        if (!(object instanceof Producto)) {
             return false;
         }
-        TblProducto other = (TblProducto) object;
+        Producto other = (Producto) object;
         if ((this.idProducto == null && other.idProducto != null) || (this.idProducto != null && !this.idProducto.equals(other.idProducto))) {
             return false;
         }

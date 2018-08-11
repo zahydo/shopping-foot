@@ -1,6 +1,6 @@
 package com.unicauca.web.pedidos;
 
-import com.unicauca.entidades.TblPedidoUsuario;
+import com.unicauca.entidades.PedidoUsuario;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
 import com.unicauca.ejbs.pedidos.TblPedidoUsuarioFacade;
@@ -25,17 +25,17 @@ public class TblPedidoUsuarioController implements Serializable {
 
     @EJB
     private com.unicauca.ejbs.pedidos.TblPedidoUsuarioFacade ejbFacade;
-    private List<TblPedidoUsuario> items = null;
-    private TblPedidoUsuario selected;
+    private List<PedidoUsuario> items = null;
+    private PedidoUsuario selected;
 
     public TblPedidoUsuarioController() {
     }
 
-    public TblPedidoUsuario getSelected() {
+    public PedidoUsuario getSelected() {
         return selected;
     }
 
-    public void setSelected(TblPedidoUsuario selected) {
+    public void setSelected(PedidoUsuario selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class TblPedidoUsuarioController implements Serializable {
         return ejbFacade;
     }
 
-    public TblPedidoUsuario prepareCreate() {
-        selected = new TblPedidoUsuario();
+    public PedidoUsuario prepareCreate() {
+        selected = new PedidoUsuario();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class TblPedidoUsuarioController implements Serializable {
         }
     }
 
-    public List<TblPedidoUsuario> getItems() {
+    public List<PedidoUsuario> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class TblPedidoUsuarioController implements Serializable {
         }
     }
 
-    public TblPedidoUsuario getTblPedidoUsuario(java.math.BigDecimal id) {
+    public PedidoUsuario getTblPedidoUsuario(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
 
-    public List<TblPedidoUsuario> getItemsAvailableSelectMany() {
+    public List<PedidoUsuario> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TblPedidoUsuario> getItemsAvailableSelectOne() {
+    public List<PedidoUsuario> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TblPedidoUsuario.class)
+    @FacesConverter(forClass = PedidoUsuario.class)
     public static class TblPedidoUsuarioControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class TblPedidoUsuarioController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblPedidoUsuario) {
-                TblPedidoUsuario o = (TblPedidoUsuario) object;
+            if (object instanceof PedidoUsuario) {
+                PedidoUsuario o = (PedidoUsuario) object;
                 return getStringKey(o.getIdPedidoUsuario());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblPedidoUsuario.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), PedidoUsuario.class.getName()});
                 return null;
             }
         }

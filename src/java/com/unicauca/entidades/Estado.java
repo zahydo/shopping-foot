@@ -27,22 +27,22 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sahydo
  */
 @Entity
-@Table(name = "TBL_PERMISO", catalog = "", schema = "VENDEDOR")
+@Table(name = "TBL_ESTADO", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblPermiso.findAll", query = "SELECT t FROM TblPermiso t")
-    , @NamedQuery(name = "TblPermiso.findByIdPermiso", query = "SELECT t FROM TblPermiso t WHERE t.idPermiso = :idPermiso")
-    , @NamedQuery(name = "TblPermiso.findByNombre", query = "SELECT t FROM TblPermiso t WHERE t.nombre = :nombre")
-    , @NamedQuery(name = "TblPermiso.findByDescripcion", query = "SELECT t FROM TblPermiso t WHERE t.descripcion = :descripcion")})
-public class TblPermiso implements Serializable {
+    @NamedQuery(name = "Estado.findAll", query = "SELECT est FROM Estado est")
+    , @NamedQuery(name = "Estado.findByIdEstado", query = "SELECT est FROM Estado est WHERE est.idEstado = :idEstado")
+    , @NamedQuery(name = "Estado.findByNombre", query = "SELECT est FROM Estado est WHERE est.nombre = :nombre")
+    , @NamedQuery(name = "Estado.findByDescripcion", query = "SELECT est FROM Estado est WHERE est.descripcion = :descripcion")})
+public class Estado implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     //@Basic(optional = false)
     //@NotNull
-    @Column(name = "ID_PERMISO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idPermiso;
+    @Column(name = "ID_ESTADO", nullable = true, precision = 38, scale = 0)
+    private BigDecimal idEstado;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -51,27 +51,27 @@ public class TblPermiso implements Serializable {
     @Size(max = 50)
     @Column(name = "DESCRIPCION", length = 50)
     private String descripcion;
-    @OneToMany(mappedBy = "idPermiso", fetch = FetchType.LAZY)
-    private List<TblPermisoUsuario> tblPermisoUsuarioList;
+    @OneToMany(mappedBy = "idEstado", fetch = FetchType.LAZY)
+    private List<Pedido> tblPedidoList;
 
-    public TblPermiso() {
+    public Estado() {
     }
 
-    public TblPermiso(BigDecimal idPermiso) {
-        this.idPermiso = idPermiso;
+    public Estado(BigDecimal idEstado) {
+        this.idEstado = idEstado;
     }
 
-    public TblPermiso(BigDecimal idPermiso, String nombre) {
-        this.idPermiso = idPermiso;
+    public Estado(BigDecimal idEstado, String nombre) {
+        this.idEstado = idEstado;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdPermiso() {
-        return idPermiso;
+    public BigDecimal getIdEstado() {
+        return idEstado;
     }
 
-    public void setIdPermiso(BigDecimal idPermiso) {
-        this.idPermiso = idPermiso;
+    public void setIdEstado(BigDecimal idEstado) {
+        this.idEstado = idEstado;
     }
 
     public String getNombre() {
@@ -91,29 +91,29 @@ public class TblPermiso implements Serializable {
     }
 
     @XmlTransient
-    public List<TblPermisoUsuario> getTblPermisoUsuarioList() {
-        return tblPermisoUsuarioList;
+    public List<Pedido> getTblPedidoList() {
+        return tblPedidoList;
     }
 
-    public void setTblPermisoUsuarioList(List<TblPermisoUsuario> tblPermisoUsuarioList) {
-        this.tblPermisoUsuarioList = tblPermisoUsuarioList;
+    public void setTblPedidoList(List<Pedido> tblPedidoList) {
+        this.tblPedidoList = tblPedidoList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPermiso != null ? idPermiso.hashCode() : 0);
+        hash += (idEstado != null ? idEstado.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblPermiso)) {
+        if (!(object instanceof Estado)) {
             return false;
         }
-        TblPermiso other = (TblPermiso) object;
-        if ((this.idPermiso == null && other.idPermiso != null) || (this.idPermiso != null && !this.idPermiso.equals(other.idPermiso))) {
+        Estado other = (Estado) object;
+        if ((this.idEstado == null && other.idEstado != null) || (this.idEstado != null && !this.idEstado.equals(other.idEstado))) {
             return false;
         }
         return true;

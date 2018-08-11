@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "TBL_PERMISO_USUARIO", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblPermisoUsuario.findAll", query = "SELECT t FROM TblPermisoUsuario t")
-    , @NamedQuery(name = "TblPermisoUsuario.findByIdPermisoUsuario", query = "SELECT t FROM TblPermisoUsuario t WHERE t.idPermisoUsuario = :idPermisoUsuario")})
-public class TblPermisoUsuario implements Serializable {
+    @NamedQuery(name = "PermisoUsuario.findAll", query = "SELECT prUsr FROM PermisoUsuario prUsr")
+    , @NamedQuery(name = "PermisoUsuario.findByIdPermisoUsuario", query = "SELECT prUsr FROM PermisoUsuario prUsr WHERE prUsr.idPermisoUsuario = :idPermisoUsuario")})
+public class PermisoUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -40,20 +40,20 @@ public class TblPermisoUsuario implements Serializable {
     private BigDecimal idPermisoUsuario;
     @JoinColumn(name = "ID_PERMISO", referencedColumnName = "ID_PERMISO")
     @ManyToOne(fetch = FetchType.LAZY)
-    private TblPermiso idPermiso;
+    private Permiso idPermiso;
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblUsuario idUsuario;
+    private Usuario idUsuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "NOMBRE_USUARIO", nullable = false, length = 30)
     private String nombreUsuario;
 
-    public TblPermisoUsuario() {
+    public PermisoUsuario() {
     }
 
-    public TblPermisoUsuario(BigDecimal idPermisoUsuario) {
+    public PermisoUsuario(BigDecimal idPermisoUsuario) {
         this.idPermisoUsuario = idPermisoUsuario;
     }
 
@@ -65,19 +65,19 @@ public class TblPermisoUsuario implements Serializable {
         this.idPermisoUsuario = idPermisoUsuario;
     }
 
-    public TblPermiso getIdPermiso() {
+    public Permiso getIdPermiso() {
         return idPermiso;
     }
 
-    public void setIdPermiso(TblPermiso idPermiso) {
+    public void setIdPermiso(Permiso idPermiso) {
         this.idPermiso = idPermiso;
     }
 
-    public TblUsuario getIdUsuario() {
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(TblUsuario idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -99,10 +99,10 @@ public class TblPermisoUsuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblPermisoUsuario)) {
+        if (!(object instanceof PermisoUsuario)) {
             return false;
         }
-        TblPermisoUsuario other = (TblPermisoUsuario) object;
+        PermisoUsuario other = (PermisoUsuario) object;
         if ((this.idPermisoUsuario == null && other.idPermisoUsuario != null) || (this.idPermisoUsuario != null && !this.idPermisoUsuario.equals(other.idPermisoUsuario))) {
             return false;
         }

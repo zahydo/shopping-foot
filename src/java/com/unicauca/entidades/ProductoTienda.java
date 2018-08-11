@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "TBL_PRODUCTO_TIENDA", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblProductoTienda.findAll", query = "SELECT t FROM TblProductoTienda t")
-    , @NamedQuery(name = "TblProductoTienda.findByIdProductoTienda", query = "SELECT t FROM TblProductoTienda t WHERE t.idProductoTienda = :idProductoTienda")})
-public class TblProductoTienda implements Serializable {
+    @NamedQuery(name = "ProductoTienda.findAll", query = "SELECT pdTda FROM ProductoTienda pdTda")
+    , @NamedQuery(name = "ProductoTienda.findByIdProductoTienda", query = "SELECT pdTda FROM ProductoTienda pdTda WHERE pdTda.idProductoTienda = :idProductoTienda")})
+public class ProductoTienda implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -39,15 +39,15 @@ public class TblProductoTienda implements Serializable {
     private BigDecimal idProductoTienda;
     @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "ID_PRODUCTO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblProducto idProducto;
+    private Producto idProducto;
     @JoinColumn(name = "ID_TIENDA", referencedColumnName = "ID_TIENDA", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblTienda idTienda;
+    private Tienda idTienda;
 
-    public TblProductoTienda() {
+    public ProductoTienda() {
     }
 
-    public TblProductoTienda(BigDecimal idProductoTienda) {
+    public ProductoTienda(BigDecimal idProductoTienda) {
         this.idProductoTienda = idProductoTienda;
     }
 
@@ -59,19 +59,19 @@ public class TblProductoTienda implements Serializable {
         this.idProductoTienda = idProductoTienda;
     }
 
-    public TblProducto getIdProducto() {
+    public Producto getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(TblProducto idProducto) {
+    public void setIdProducto(Producto idProducto) {
         this.idProducto = idProducto;
     }
 
-    public TblTienda getIdTienda() {
+    public Tienda getIdTienda() {
         return idTienda;
     }
 
-    public void setIdTienda(TblTienda idTienda) {
+    public void setIdTienda(Tienda idTienda) {
         this.idTienda = idTienda;
     }
 
@@ -85,10 +85,10 @@ public class TblProductoTienda implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblProductoTienda)) {
+        if (!(object instanceof ProductoTienda)) {
             return false;
         }
-        TblProductoTienda other = (TblProductoTienda) object;
+        ProductoTienda other = (ProductoTienda) object;
         if ((this.idProductoTienda == null && other.idProductoTienda != null) || (this.idProductoTienda != null && !this.idProductoTienda.equals(other.idProductoTienda))) {
             return false;
         }

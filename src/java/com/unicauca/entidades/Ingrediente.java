@@ -28,49 +28,49 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sahydo
  */
 @Entity
-@Table(name = "TBL_TIENDA", catalog = "", schema = "VENDEDOR")
+@Table(name = "TBL_INGREDIENTE", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblTienda.findAll", query = "SELECT t FROM TblTienda t")
-    , @NamedQuery(name = "TblTienda.findByIdTienda", query = "SELECT t FROM TblTienda t WHERE t.idTienda = :idTienda")
-    , @NamedQuery(name = "TblTienda.findByNombre", query = "SELECT t FROM TblTienda t WHERE t.nombre = :nombre")
-    , @NamedQuery(name = "TblTienda.findByDescripcion", query = "SELECT t FROM TblTienda t WHERE t.descripcion = :descripcion")})
-public class TblTienda implements Serializable {
+    @NamedQuery(name = "Ingrediente.findAll", query = "SELECT ing FROM Ingrediente ing")
+    , @NamedQuery(name = "Ingrediente.findByIdIngrediente", query = "SELECT ing FROM Ingrediente ing WHERE ing.idIngrediente = :idIngrediente")
+    , @NamedQuery(name = "Ingrediente.findByNombre", query = "SELECT ing FROM Ingrediente ing WHERE ing.nombre = :nombre")
+    , @NamedQuery(name = "Ingrediente.findByDescripcion", query = "SELECT ing FROM Ingrediente ing WHERE ing.descripcion = :descripcion")})
+public class Ingrediente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @Column(name = "ID_TIENDA", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idTienda;
+    @Column(name = "ID_INGREDIENTE", nullable = true, precision = 38, scale = 0)
+    private BigDecimal idIngrediente;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "NOMBRE", nullable = false, length = 30)
+    @Size(min = 1, max = 2030)
+    @Column(name = "NOMBRE", nullable = false, length = 2030)
     private String nombre;
     @Size(max = 50)
     @Column(name = "DESCRIPCION", length = 50)
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTienda", fetch = FetchType.LAZY)
-    private List<TblProductoTienda> tblProductoTiendaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIngrediente", fetch = FetchType.LAZY)
+    private List<IngredienteProducto> tblIngredienteProductoList;
 
-    public TblTienda() {
+    public Ingrediente() {
     }
 
-    public TblTienda(BigDecimal idTienda) {
-        this.idTienda = idTienda;
+    public Ingrediente(BigDecimal idIngrediente) {
+        this.idIngrediente = idIngrediente;
     }
 
-    public TblTienda(BigDecimal idTienda, String nombre) {
-        this.idTienda = idTienda;
+    public Ingrediente(BigDecimal idIngrediente, String nombre) {
+        this.idIngrediente = idIngrediente;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdTienda() {
-        return idTienda;
+    public BigDecimal getIdIngrediente() {
+        return idIngrediente;
     }
 
-    public void setIdTienda(BigDecimal idTienda) {
-        this.idTienda = idTienda;
+    public void setIdIngrediente(BigDecimal idIngrediente) {
+        this.idIngrediente = idIngrediente;
     }
 
     public String getNombre() {
@@ -90,29 +90,29 @@ public class TblTienda implements Serializable {
     }
 
     @XmlTransient
-    public List<TblProductoTienda> getTblProductoTiendaList() {
-        return tblProductoTiendaList;
+    public List<IngredienteProducto> getIngredienteProductoList() {
+        return tblIngredienteProductoList;
     }
 
-    public void setTblProductoTiendaList(List<TblProductoTienda> tblProductoTiendaList) {
-        this.tblProductoTiendaList = tblProductoTiendaList;
+    public void setIngredienteProductoList(List<IngredienteProducto> tblIngredienteProductoList) {
+        this.tblIngredienteProductoList = tblIngredienteProductoList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTienda != null ? idTienda.hashCode() : 0);
+        hash += (idIngrediente != null ? idIngrediente.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblTienda)) {
+        if (!(object instanceof Ingrediente)) {
             return false;
         }
-        TblTienda other = (TblTienda) object;
-        if ((this.idTienda == null && other.idTienda != null) || (this.idTienda != null && !this.idTienda.equals(other.idTienda))) {
+        Ingrediente other = (Ingrediente) object;
+        if ((this.idIngrediente == null && other.idIngrediente != null) || (this.idIngrediente != null && !this.idIngrediente.equals(other.idIngrediente))) {
             return false;
         }
         return true;

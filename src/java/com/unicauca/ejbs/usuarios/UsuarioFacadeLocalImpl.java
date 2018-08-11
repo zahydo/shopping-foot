@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.interfaces;
+package com.unicauca.ejbs.usuarios;
+
+import javax.ejb.Stateless;
 
 /**
  *
  * @author sahydo
  */
-public interface Usuarios {
+@Stateless
+public class UsuarioFacadeLocalImpl  {
+
     
 }

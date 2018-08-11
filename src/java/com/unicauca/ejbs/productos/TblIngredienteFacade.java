@@ -6,7 +6,7 @@
 package com.unicauca.ejbs.productos;
 
 import com.unicauca.ejbs.AbstractFacade;
-import com.unicauca.entidades.TblIngrediente;
+import com.unicauca.entidades.Ingrediente;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author sahydo
  */
 @Stateless
-public class TblIngredienteFacade extends AbstractFacade<TblIngrediente> {
+public class TblIngredienteFacade extends AbstractFacade<Ingrediente> {
 
     @PersistenceContext(unitName = "shoppingPU")
     private EntityManager em;
@@ -27,7 +27,7 @@ public class TblIngredienteFacade extends AbstractFacade<TblIngrediente> {
     }
 
     public TblIngredienteFacade() {
-        super(TblIngrediente.class);
+        super(Ingrediente.class);
     }
     
 }

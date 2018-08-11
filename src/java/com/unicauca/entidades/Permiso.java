@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,49 +27,51 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sahydo
  */
 @Entity
-@Table(name = "TBL_INGREDIENTE", catalog = "", schema = "VENDEDOR")
+@Table(name = "TBL_PERMISO", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblIngrediente.findAll", query = "SELECT t FROM TblIngrediente t")
-    , @NamedQuery(name = "TblIngrediente.findByIdIngrediente", query = "SELECT t FROM TblIngrediente t WHERE t.idIngrediente = :idIngrediente")
-    , @NamedQuery(name = "TblIngrediente.findByNombre", query = "SELECT t FROM TblIngrediente t WHERE t.nombre = :nombre")
-    , @NamedQuery(name = "TblIngrediente.findByDescripcion", query = "SELECT t FROM TblIngrediente t WHERE t.descripcion = :descripcion")})
-public class TblIngrediente implements Serializable {
+    @NamedQuery(name = "Permiso.findAll", query = "SELECT per FROM Permiso per")
+    , @NamedQuery(name = "Permiso.findByIdPermiso", query = "SELECT per FROM Permiso per WHERE per.idPermiso = :idPermiso")
+    , @NamedQuery(name = "Permiso.findByNombre", query = "SELECT per FROM Permiso per WHERE per.nombre = :nombre")
+    , @NamedQuery(name = "Permiso.findByDescripcion", query = "SELECT per FROM Permiso per WHERE per.descripcion = :descripcion")})
+public class Permiso implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @Column(name = "ID_INGREDIENTE", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idIngrediente;
+    //@Basic(optional = false)
+    //@NotNull
+    @Column(name = "ID_PERMISO", nullable = true, precision = 38, scale = 0)
+    private BigDecimal idPermiso;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2030)
-    @Column(name = "NOMBRE", nullable = false, length = 2030)
+    @Size(min = 1, max = 30)
+    @Column(name = "NOMBRE", nullable = false, length = 30)
     private String nombre;
     @Size(max = 50)
     @Column(name = "DESCRIPCION", length = 50)
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIngrediente", fetch = FetchType.LAZY)
-    private List<TblIngredienteProducto> tblIngredienteProductoList;
+    @OneToMany(mappedBy = "idPermiso", fetch = FetchType.LAZY)
+    private List<PermisoUsuario> tblPermisoUsuarioList;
 
-    public TblIngrediente() {
+    public Permiso() {
     }
 
-    public TblIngrediente(BigDecimal idIngrediente) {
-        this.idIngrediente = idIngrediente;
+    public Permiso(BigDecimal idPermiso) {
+        this.idPermiso = idPermiso;
     }
 
-    public TblIngrediente(BigDecimal idIngrediente, String nombre) {
-        this.idIngrediente = idIngrediente;
+    public Permiso(BigDecimal idPermiso, String nombre) {
+        this.idPermiso = idPermiso;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdIngrediente() {
-        return idIngrediente;
+    public BigDecimal getIdPermiso() {
+        return idPermiso;
     }
 
-    public void setIdIngrediente(BigDecimal idIngrediente) {
-        this.idIngrediente = idIngrediente;
+    public void setIdPermiso(BigDecimal idPermiso) {
+        this.idPermiso = idPermiso;
     }
 
     public String getNombre() {
@@ -90,29 +91,29 @@ public class TblIngrediente implements Serializable {
     }
 
     @XmlTransient
-    public List<TblIngredienteProducto> getTblIngredienteProductoList() {
-        return tblIngredienteProductoList;
+    public List<PermisoUsuario> getPermisoUsuarioList() {
+        return tblPermisoUsuarioList;
     }
 
-    public void setTblIngredienteProductoList(List<TblIngredienteProducto> tblIngredienteProductoList) {
-        this.tblIngredienteProductoList = tblIngredienteProductoList;
+    public void setPermisoUsuarioList(List<PermisoUsuario> tblPermisoUsuarioList) {
+        this.tblPermisoUsuarioList = tblPermisoUsuarioList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idIngrediente != null ? idIngrediente.hashCode() : 0);
+        hash += (idPermiso != null ? idPermiso.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblIngrediente)) {
+        if (!(object instanceof Permiso)) {
             return false;
         }
-        TblIngrediente other = (TblIngrediente) object;
-        if ((this.idIngrediente == null && other.idIngrediente != null) || (this.idIngrediente != null && !this.idIngrediente.equals(other.idIngrediente))) {
+        Permiso other = (Permiso) object;
+        if ((this.idPermiso == null && other.idPermiso != null) || (this.idPermiso != null && !this.idPermiso.equals(other.idPermiso))) {
             return false;
         }
         return true;

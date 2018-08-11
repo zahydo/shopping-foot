@@ -1,6 +1,6 @@
 package com.unicauca.web.configuracion;
 
-import com.unicauca.entidades.TblEstado;
+import com.unicauca.entidades.Estado;
 import com.unicauca.ejbs.configuracion.TblEstadoFacade;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
@@ -25,17 +25,17 @@ public class TblEstadoController implements Serializable {
 
     @EJB
     private com.unicauca.ejbs.configuracion.TblEstadoFacade ejbFacade;
-    private List<TblEstado> items = null;
-    private TblEstado selected;
+    private List<Estado> items = null;
+    private Estado selected;
 
     public TblEstadoController() {
     }
 
-    public TblEstado getSelected() {
+    public Estado getSelected() {
         return selected;
     }
 
-    public void setSelected(TblEstado selected) {
+    public void setSelected(Estado selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class TblEstadoController implements Serializable {
         return ejbFacade;
     }
 
-    public TblEstado prepareCreate() {
-        selected = new TblEstado();
+    public Estado prepareCreate() {
+        selected = new Estado();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class TblEstadoController implements Serializable {
         }
     }
 
-    public List<TblEstado> getItems() {
+    public List<Estado> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class TblEstadoController implements Serializable {
         }
     }
 
-    public TblEstado getTblEstado(java.math.BigDecimal id) {
+    public Estado getTblEstado(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
 
-    public List<TblEstado> getItemsAvailableSelectMany() {
+    public List<Estado> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TblEstado> getItemsAvailableSelectOne() {
+    public List<Estado> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TblEstado.class)
+    @FacesConverter(forClass = Estado.class)
     public static class TblEstadoControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class TblEstadoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblEstado) {
-                TblEstado o = (TblEstado) object;
+            if (object instanceof Estado) {
+                Estado o = (Estado) object;
                 return getStringKey(o.getIdEstado());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblEstado.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Estado.class.getName()});
                 return null;
             }
         }

@@ -6,7 +6,7 @@
 package com.unicauca.ejbs.usuarios;
 
 import com.unicauca.ejbs.AbstractFacade;
-import com.unicauca.entidades.TblRol;
+import com.unicauca.entidades.Rol;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author sahydo
  */
 @Stateless
-public class TblRolFacade extends AbstractFacade<TblRol> {
+public class TblRolFacade extends AbstractFacade<Rol> {
 
     @PersistenceContext(unitName = "shoppingPU")
     private EntityManager em;
@@ -27,7 +27,7 @@ public class TblRolFacade extends AbstractFacade<TblRol> {
     }
 
     public TblRolFacade() {
-        super(TblRol.class);
+        super(Rol.class);
     }
     
 }

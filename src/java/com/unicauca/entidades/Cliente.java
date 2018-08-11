@@ -33,14 +33,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @UniqueConstraint(columnNames = {"IDENTIFICACION"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblCliente.findAll", query = "SELECT t FROM TblCliente t")
-    , @NamedQuery(name = "TblCliente.findByIdCliente", query = "SELECT t FROM TblCliente t WHERE t.idCliente = :idCliente")
-    , @NamedQuery(name = "TblCliente.findByIdentificacion", query = "SELECT t FROM TblCliente t WHERE t.identificacion = :identificacion")
-    , @NamedQuery(name = "TblCliente.findByEmail", query = "SELECT t FROM TblCliente t WHERE t.email = :email")
-    , @NamedQuery(name = "TblCliente.findByNombre", query = "SELECT t FROM TblCliente t WHERE t.nombre = :nombre")
-    , @NamedQuery(name = "TblCliente.findByDireccion", query = "SELECT t FROM TblCliente t WHERE t.direccion = :direccion")
-    , @NamedQuery(name = "TblCliente.findByTelefono", query = "SELECT t FROM TblCliente t WHERE t.telefono = :telefono")})
-public class TblCliente implements Serializable {
+    @NamedQuery(name = "Cliente.findAll", query = "SELECT cli FROM Cliente cli")
+    , @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT cli FROM Cliente cli WHERE cli.idCliente = :idCliente")
+    , @NamedQuery(name = "Cliente.findByIdentificacion", query = "SELECT cli FROM Cliente cli WHERE cli.identificacion = :identificacion")
+    , @NamedQuery(name = "Cliente.findByEmail", query = "SELECT cli FROM Cliente cli WHERE cli.email = :email")
+    , @NamedQuery(name = "Cliente.findByNombre", query = "SELECT cli FROM Cliente cli WHERE cli.nombre = :nombre")
+    , @NamedQuery(name = "Cliente.findByDireccion", query = "SELECT cli FROM Cliente cli WHERE cli.direccion = :direccion")
+    , @NamedQuery(name = "Cliente.findByTelefono", query = "SELECT cli FROM Cliente cli WHERE cli.telefono = :telefono")})
+public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -72,16 +72,16 @@ public class TblCliente implements Serializable {
     @Column(name = "TELEFONO", length = 20)
     private String telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente", fetch = FetchType.LAZY)
-    private List<TblPedido> tblPedidoList;
+    private List<Pedido> tblPedidoList;
 
-    public TblCliente() {
+    public Cliente() {
     }
 
-    public TblCliente(BigDecimal idCliente) {
+    public Cliente(BigDecimal idCliente) {
         this.idCliente = idCliente;
     }
 
-    public TblCliente(BigDecimal idCliente, String identificacion, String email, String nombre, String direccion) {
+    public Cliente(BigDecimal idCliente, String identificacion, String email, String nombre, String direccion) {
         this.idCliente = idCliente;
         this.identificacion = identificacion;
         this.email = email;
@@ -138,11 +138,11 @@ public class TblCliente implements Serializable {
     }
 
     @XmlTransient
-    public List<TblPedido> getTblPedidoList() {
+    public List<Pedido> getTblPedidoList() {
         return tblPedidoList;
     }
 
-    public void setTblPedidoList(List<TblPedido> tblPedidoList) {
+    public void setTblPedidoList(List<Pedido> tblPedidoList) {
         this.tblPedidoList = tblPedidoList;
     }
 
@@ -156,10 +156,10 @@ public class TblCliente implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblCliente)) {
+        if (!(object instanceof Cliente)) {
             return false;
         }
-        TblCliente other = (TblCliente) object;
+        Cliente other = (Cliente) object;
         if ((this.idCliente == null && other.idCliente != null) || (this.idCliente != null && !this.idCliente.equals(other.idCliente))) {
             return false;
         }

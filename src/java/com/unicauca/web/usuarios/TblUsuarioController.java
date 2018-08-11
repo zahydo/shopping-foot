@@ -1,6 +1,6 @@
 package com.unicauca.web.usuarios;
 
-import com.unicauca.entidades.TblUsuario;
+import com.unicauca.entidades.Usuario;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
 import com.unicauca.ejbs.usuarios.TblUsuarioFacade;
@@ -25,45 +25,17 @@ public class TblUsuarioController implements Serializable{
 
     @EJB
     private com.unicauca.ejbs.usuarios.TblUsuarioFacade ejbFacade;
-    @EJB
-    private com.unicauca.ejbs.usuarios.LoginFacade loginFacade;
-    private List<TblUsuario> items = null;
-    private TblUsuario selected;
-    private String pwd;
-    private String msg;
-    private String user;
-    
-    public String getPwd() {
-        return pwd;
-    }
+    private List<Usuario> items = null;
+    private Usuario selected;
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
     public TblUsuarioController() {
     }
 
-    public TblUsuario getSelected() {
+    public Usuario getSelected() {
         return selected;
     }
 
-    public void setSelected(TblUsuario selected) {
+    public void setSelected(Usuario selected) {
         this.selected = selected;
     }
 
@@ -77,8 +49,8 @@ public class TblUsuarioController implements Serializable{
         return ejbFacade;
     }
 
-    public TblUsuario prepareCreate() {
-        selected = new TblUsuario();
+    public Usuario prepareCreate() {
+        selected = new Usuario();
         initializeEmbeddableKey();
         return selected;
     }
@@ -102,7 +74,7 @@ public class TblUsuarioController implements Serializable{
         }
     }
 
-    public List<TblUsuario> getItems() {
+    public List<Usuario> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -137,19 +109,19 @@ public class TblUsuarioController implements Serializable{
         }
     }
 
-    public TblUsuario getTblUsuario(java.math.BigDecimal id) {
+    public Usuario getTblUsuario(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
 
-    public List<TblUsuario> getItemsAvailableSelectMany() {
+    public List<Usuario> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TblUsuario> getItemsAvailableSelectOne() {
+    public List<Usuario> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TblUsuario.class)
+    @FacesConverter(forClass = Usuario.class)
     public static class TblUsuarioControllerConverter implements Converter {
 
         @Override
@@ -179,17 +151,14 @@ public class TblUsuarioController implements Serializable{
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblUsuario) {
-                TblUsuario o = (TblUsuario) object;
+            if (object instanceof Usuario) {
+                Usuario o = (Usuario) object;
                 return getStringKey(o.getIdUsuario());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblUsuario.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Usuario.class.getName()});
                 return null;
             }
         }
 
-    }
-    public void validateUsernamePassword(){
-        TblUsuario usuario = loginFacade.validate(user, pwd);
     }
 }

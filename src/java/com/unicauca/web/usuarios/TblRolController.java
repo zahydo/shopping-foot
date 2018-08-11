@@ -1,7 +1,7 @@
 package com.unicauca.web.usuarios;
 
 import com.unicauca.ejbs.usuarios.TblRolFacade;
-import com.unicauca.entidades.TblRol;
+import com.unicauca.entidades.Rol;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
 
@@ -25,17 +25,17 @@ public class TblRolController implements Serializable {
 
     @EJB
     private com.unicauca.ejbs.usuarios.TblRolFacade ejbFacade;
-    private List<TblRol> items = null;
-    private TblRol selected;
+    private List<Rol> items = null;
+    private Rol selected;
 
     public TblRolController() {
     }
 
-    public TblRol getSelected() {
+    public Rol getSelected() {
         return selected;
     }
 
-    public void setSelected(TblRol selected) {
+    public void setSelected(Rol selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class TblRolController implements Serializable {
         return ejbFacade;
     }
 
-    public TblRol prepareCreate() {
-        selected = new TblRol();
+    public Rol prepareCreate() {
+        selected = new Rol();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class TblRolController implements Serializable {
         }
     }
 
-    public List<TblRol> getItems() {
+    public List<Rol> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class TblRolController implements Serializable {
         }
     }
 
-    public TblRol getTblRol(java.math.BigDecimal id) {
+    public Rol getTblRol(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
 
-    public List<TblRol> getItemsAvailableSelectMany() {
+    public List<Rol> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TblRol> getItemsAvailableSelectOne() {
+    public List<Rol> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TblRol.class)
+    @FacesConverter(forClass = Rol.class)
     public static class TblRolControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class TblRolController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblRol) {
-                TblRol o = (TblRol) object;
+            if (object instanceof Rol) {
+                Rol o = (Rol) object;
                 return getStringKey(o.getIdRol());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblRol.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Rol.class.getName()});
                 return null;
             }
         }

@@ -28,20 +28,20 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sahydo
  */
 @Entity
-@Table(name = "TBL_TERMINAL", catalog = "", schema = "VENDEDOR")
+@Table(name = "TBL_CATEGORIA", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblTerminal.findAll", query = "SELECT t FROM TblTerminal t")
-    , @NamedQuery(name = "TblTerminal.findByIdTerminal", query = "SELECT t FROM TblTerminal t WHERE t.idTerminal = :idTerminal")
-    , @NamedQuery(name = "TblTerminal.findByNombre", query = "SELECT t FROM TblTerminal t WHERE t.nombre = :nombre")
-    , @NamedQuery(name = "TblTerminal.findByDescripcion", query = "SELECT t FROM TblTerminal t WHERE t.descripcion = :descripcion")})
-public class TblTerminal implements Serializable {
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT cat FROM Categoria cat")
+    , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT cat FROM Categoria cat WHERE cat.idCategoria = :idCategoria")
+    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT cat FROM Categoria cat WHERE cat.nombre = :nombre")
+    , @NamedQuery(name = "Categoria.findByDescripcion", query = "SELECT cat FROM Categoria cat WHERE cat.descripcion = :descripcion")})
+public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @Column(name = "ID_TERMINAL", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idTerminal;
+    @Column(name = "ID_CATEGORIA", nullable = true, precision = 38, scale = 0)
+    private BigDecimal idCategoria;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -50,27 +50,27 @@ public class TblTerminal implements Serializable {
     @Size(max = 50)
     @Column(name = "DESCRIPCION", length = 50)
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTerminal", fetch = FetchType.LAZY)
-    private List<TblPedidoUsuario> tblPedidoUsuarioList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoria", fetch = FetchType.LAZY)
+    private List<Producto> tblProductoList;
 
-    public TblTerminal() {
+    public Categoria() {
     }
 
-    public TblTerminal(BigDecimal idTerminal) {
-        this.idTerminal = idTerminal;
+    public Categoria(BigDecimal idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
-    public TblTerminal(BigDecimal idTerminal, String nombre) {
-        this.idTerminal = idTerminal;
+    public Categoria(BigDecimal idCategoria, String nombre) {
+        this.idCategoria = idCategoria;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdTerminal() {
-        return idTerminal;
+    public BigDecimal getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setIdTerminal(BigDecimal idTerminal) {
-        this.idTerminal = idTerminal;
+    public void setIdCategoria(BigDecimal idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public String getNombre() {
@@ -90,29 +90,29 @@ public class TblTerminal implements Serializable {
     }
 
     @XmlTransient
-    public List<TblPedidoUsuario> getTblPedidoUsuarioList() {
-        return tblPedidoUsuarioList;
+    public List<Producto> getTblProductoList() {
+        return tblProductoList;
     }
 
-    public void setTblPedidoUsuarioList(List<TblPedidoUsuario> tblPedidoUsuarioList) {
-        this.tblPedidoUsuarioList = tblPedidoUsuarioList;
+    public void setTblProductoList(List<Producto> tblProductoList) {
+        this.tblProductoList = tblProductoList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTerminal != null ? idTerminal.hashCode() : 0);
+        hash += (idCategoria != null ? idCategoria.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblTerminal)) {
+        if (!(object instanceof Categoria)) {
             return false;
         }
-        TblTerminal other = (TblTerminal) object;
-        if ((this.idTerminal == null && other.idTerminal != null) || (this.idTerminal != null && !this.idTerminal.equals(other.idTerminal))) {
+        Categoria other = (Categoria) object;
+        if ((this.idCategoria == null && other.idCategoria != null) || (this.idCategoria != null && !this.idCategoria.equals(other.idCategoria))) {
             return false;
         }
         return true;

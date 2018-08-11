@@ -1,6 +1,6 @@
 package com.unicauca.web.pedidos;
 
-import com.unicauca.entidades.TblCliente;
+import com.unicauca.entidades.Cliente;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
 import com.unicauca.ejbs.pedidos.TblClienteFacade;
@@ -25,17 +25,17 @@ public class TblClienteController implements Serializable {
 
     @EJB
     private com.unicauca.ejbs.pedidos.TblClienteFacade ejbFacade;
-    private List<TblCliente> items = null;
-    private TblCliente selected;
+    private List<Cliente> items = null;
+    private Cliente selected;
 
     public TblClienteController() {
     }
 
-    public TblCliente getSelected() {
+    public Cliente getSelected() {
         return selected;
     }
 
-    public void setSelected(TblCliente selected) {
+    public void setSelected(Cliente selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class TblClienteController implements Serializable {
         return ejbFacade;
     }
 
-    public TblCliente prepareCreate() {
-        selected = new TblCliente();
+    public Cliente prepareCreate() {
+        selected = new Cliente();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class TblClienteController implements Serializable {
         }
     }
 
-    public List<TblCliente> getItems() {
+    public List<Cliente> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class TblClienteController implements Serializable {
         }
     }
 
-    public TblCliente getTblCliente(java.math.BigDecimal id) {
+    public Cliente getTblCliente(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
 
-    public List<TblCliente> getItemsAvailableSelectMany() {
+    public List<Cliente> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TblCliente> getItemsAvailableSelectOne() {
+    public List<Cliente> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TblCliente.class)
+    @FacesConverter(forClass = Cliente.class)
     public static class TblClienteControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class TblClienteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblCliente) {
-                TblCliente o = (TblCliente) object;
+            if (object instanceof Cliente) {
+                Cliente o = (Cliente) object;
                 return getStringKey(o.getIdCliente());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblCliente.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Cliente.class.getName()});
                 return null;
             }
         }

@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "TBL_PEDIDO_USUARIO", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblPedidoUsuario.findAll", query = "SELECT t FROM TblPedidoUsuario t")
-    , @NamedQuery(name = "TblPedidoUsuario.findByIdPedidoUsuario", query = "SELECT t FROM TblPedidoUsuario t WHERE t.idPedidoUsuario = :idPedidoUsuario")})
-public class TblPedidoUsuario implements Serializable {
+    @NamedQuery(name = "PedidoUsuario.findAll", query = "SELECT pdUs FROM PedidoUsuario pdUs")
+    , @NamedQuery(name = "PedidoUsuario.findByIdPedidoUsuario", query = "SELECT pdUs FROM PedidoUsuario pdUs WHERE pdUs.idPedidoUsuario = :idPedidoUsuario")})
+public class PedidoUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -39,18 +39,18 @@ public class TblPedidoUsuario implements Serializable {
     private BigDecimal idPedidoUsuario;
     @JoinColumn(name = "ID_PEDIDO", referencedColumnName = "ID_PEDIDO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblPedido idPedido;
+    private Pedido idPedido;
     @JoinColumn(name = "ID_TERMINAL", referencedColumnName = "ID_TERMINAL", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblTerminal idTerminal;
+    private Terminal idTerminal;
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblUsuario idUsuario;
+    private Usuario idUsuario;
 
-    public TblPedidoUsuario() {
+    public PedidoUsuario() {
     }
 
-    public TblPedidoUsuario(BigDecimal idPedidoUsuario) {
+    public PedidoUsuario(BigDecimal idPedidoUsuario) {
         this.idPedidoUsuario = idPedidoUsuario;
     }
 
@@ -62,27 +62,27 @@ public class TblPedidoUsuario implements Serializable {
         this.idPedidoUsuario = idPedidoUsuario;
     }
 
-    public TblPedido getIdPedido() {
+    public Pedido getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(TblPedido idPedido) {
+    public void setIdPedido(Pedido idPedido) {
         this.idPedido = idPedido;
     }
 
-    public TblTerminal getIdTerminal() {
+    public Terminal getIdTerminal() {
         return idTerminal;
     }
 
-    public void setIdTerminal(TblTerminal idTerminal) {
+    public void setIdTerminal(Terminal idTerminal) {
         this.idTerminal = idTerminal;
     }
 
-    public TblUsuario getIdUsuario() {
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(TblUsuario idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -96,10 +96,10 @@ public class TblPedidoUsuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblPedidoUsuario)) {
+        if (!(object instanceof PedidoUsuario)) {
             return false;
         }
-        TblPedidoUsuario other = (TblPedidoUsuario) object;
+        PedidoUsuario other = (PedidoUsuario) object;
         if ((this.idPedidoUsuario == null && other.idPedidoUsuario != null) || (this.idPedidoUsuario != null && !this.idPedidoUsuario.equals(other.idPedidoUsuario))) {
             return false;
         }

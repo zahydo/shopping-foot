@@ -28,20 +28,20 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sahydo
  */
 @Entity
-@Table(name = "TBL_CATEGORIA", catalog = "", schema = "VENDEDOR")
+@Table(name = "TBL_ROL", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblCategoria.findAll", query = "SELECT t FROM TblCategoria t")
-    , @NamedQuery(name = "TblCategoria.findByIdCategoria", query = "SELECT t FROM TblCategoria t WHERE t.idCategoria = :idCategoria")
-    , @NamedQuery(name = "TblCategoria.findByNombre", query = "SELECT t FROM TblCategoria t WHERE t.nombre = :nombre")
-    , @NamedQuery(name = "TblCategoria.findByDescripcion", query = "SELECT t FROM TblCategoria t WHERE t.descripcion = :descripcion")})
-public class TblCategoria implements Serializable {
+    @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r")
+    , @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol")
+    , @NamedQuery(name = "Rol.findByNombre", query = "SELECT r FROM Rol r WHERE r.nombre = :nombre")
+    , @NamedQuery(name = "Rol.findByDescripcion", query = "SELECT r FROM Rol r WHERE r.descripcion = :descripcion")})
+public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @Column(name = "ID_CATEGORIA", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idCategoria;
+    @Column(name = "ID_ROL", nullable = true, precision = 38, scale = 0)
+    private BigDecimal idRol;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -50,27 +50,27 @@ public class TblCategoria implements Serializable {
     @Size(max = 50)
     @Column(name = "DESCRIPCION", length = 50)
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoria", fetch = FetchType.LAZY)
-    private List<TblProducto> tblProductoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRol", fetch = FetchType.LAZY)
+    private List<Usuario> tblUsuarioList;
 
-    public TblCategoria() {
+    public Rol() {
     }
 
-    public TblCategoria(BigDecimal idCategoria) {
-        this.idCategoria = idCategoria;
+    public Rol(BigDecimal idRol) {
+        this.idRol = idRol;
     }
 
-    public TblCategoria(BigDecimal idCategoria, String nombre) {
-        this.idCategoria = idCategoria;
+    public Rol(BigDecimal idRol, String nombre) {
+        this.idRol = idRol;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdCategoria() {
-        return idCategoria;
+    public BigDecimal getIdRol() {
+        return idRol;
     }
 
-    public void setIdCategoria(BigDecimal idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setIdRol(BigDecimal idRol) {
+        this.idRol = idRol;
     }
 
     public String getNombre() {
@@ -90,29 +90,29 @@ public class TblCategoria implements Serializable {
     }
 
     @XmlTransient
-    public List<TblProducto> getTblProductoList() {
-        return tblProductoList;
+    public List<Usuario> getTblUsuarioList() {
+        return tblUsuarioList;
     }
 
-    public void setTblProductoList(List<TblProducto> tblProductoList) {
-        this.tblProductoList = tblProductoList;
+    public void setTblUsuarioList(List<Usuario> tblUsuarioList) {
+        this.tblUsuarioList = tblUsuarioList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCategoria != null ? idCategoria.hashCode() : 0);
+        hash += (idRol != null ? idRol.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblCategoria)) {
+        if (!(object instanceof Rol)) {
             return false;
         }
-        TblCategoria other = (TblCategoria) object;
-        if ((this.idCategoria == null && other.idCategoria != null) || (this.idCategoria != null && !this.idCategoria.equals(other.idCategoria))) {
+        Rol other = (Rol) object;
+        if ((this.idRol == null && other.idRol != null) || (this.idRol != null && !this.idRol.equals(other.idRol))) {
             return false;
         }
         return true;

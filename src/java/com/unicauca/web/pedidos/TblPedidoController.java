@@ -1,9 +1,9 @@
 package com.unicauca.web.pedidos;
 
-import com.unicauca.entidades.TblPedido;
+import com.unicauca.entidades.Pedido;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
-import com.unicauca.ejbs.pedidos.TblPedidoFacade;
+import com.unicauca.entidades.Producto;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -24,18 +25,18 @@ import javax.faces.convert.FacesConverter;
 public class TblPedidoController implements Serializable {
 
     @EJB
-    private com.unicauca.ejbs.pedidos.TblPedidoFacade ejbFacade;
-    private List<TblPedido> items = null;
-    private TblPedido selected;
+    private com.unicauca.interfaces.PedidosFacadeLocal ejbFacade;
+    private List<Pedido> items = null;
+    private Pedido selected;
 
     public TblPedidoController() {
     }
 
-    public TblPedido getSelected() {
+    public Pedido getSelected() {
         return selected;
     }
 
-    public void setSelected(TblPedido selected) {
+    public void setSelected(Pedido selected) {
         this.selected = selected;
     }
 
@@ -45,12 +46,8 @@ public class TblPedidoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TblPedidoFacade getFacade() {
-        return ejbFacade;
-    }
-
-    public TblPedido prepareCreate() {
-        selected = new TblPedido();
+    public Pedido prepareCreate() {
+        selected = new Pedido();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,9 +71,9 @@ public class TblPedidoController implements Serializable {
         }
     }
 
-    public List<TblPedido> getItems() {
+    public List<Pedido> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = ejbFacade.buscarTodosLosPedidos();
         }
         return items;
     }
@@ -86,9 +83,9 @@ public class TblPedidoController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    ejbFacade.editarPedido(selected);
                 } else {
-                    getFacade().remove(selected);
+                    ejbFacade.eliminarPedido(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -109,19 +106,19 @@ public class TblPedidoController implements Serializable {
         }
     }
 
-    public TblPedido getTblPedido(java.math.BigDecimal id) {
-        return getFacade().find(id);
+    public Pedido getTblPedido(java.math.BigDecimal id) {
+        return ejbFacade.buscarPedido(id);
     }
 
-    public List<TblPedido> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+    public List<Pedido> getItemsAvailableSelectMany() {
+        return ejbFacade.buscarTodosLosPedidos();
     }
 
-    public List<TblPedido> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+    public List<Pedido> getItemsAvailableSelectOne() {
+        return ejbFacade.buscarTodosLosPedidos();
     }
 
-    @FacesConverter(forClass = TblPedido.class)
+    @FacesConverter(forClass = Pedido.class)
     public static class TblPedidoControllerConverter implements Converter {
 
         @Override
@@ -151,15 +148,14 @@ public class TblPedidoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblPedido) {
-                TblPedido o = (TblPedido) object;
+            if (object instanceof Pedido) {
+                Pedido o = (Pedido) object;
                 return getStringKey(o.getIdPedido());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblPedido.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Pedido.class.getName()});
                 return null;
             }
         }
 
     }
-
 }

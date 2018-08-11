@@ -5,10 +5,12 @@
  */
 package com.unicauca.interfaces;
 
+import com.unicauca.entidades.Usuario;
+
 /**
  *
  * @author sahydo
  */
-public interface Pedidos {
-    
+public interface UsuarioFacadeLocal {
+    Usuario inicarSesion(Usuario user);
 }

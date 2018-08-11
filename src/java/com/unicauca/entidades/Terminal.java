@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,22 +28,20 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sahydo
  */
 @Entity
-@Table(name = "TBL_ESTADO", catalog = "", schema = "VENDEDOR")
+@Table(name = "TBL_TERMINAL", catalog = "", schema = "VENDEDOR")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblEstado.findAll", query = "SELECT t FROM TblEstado t")
-    , @NamedQuery(name = "TblEstado.findByIdEstado", query = "SELECT t FROM TblEstado t WHERE t.idEstado = :idEstado")
-    , @NamedQuery(name = "TblEstado.findByNombre", query = "SELECT t FROM TblEstado t WHERE t.nombre = :nombre")
-    , @NamedQuery(name = "TblEstado.findByDescripcion", query = "SELECT t FROM TblEstado t WHERE t.descripcion = :descripcion")})
-public class TblEstado implements Serializable {
+    @NamedQuery(name = "Terminal.findAll", query = "SELECT ter FROM Terminal ter")
+    , @NamedQuery(name = "Terminal.findByIdTerminal", query = "SELECT ter FROM Terminal ter WHERE ter.idTerminal = :idTerminal")
+    , @NamedQuery(name = "Terminal.findByNombre", query = "SELECT ter FROM Terminal ter WHERE ter.nombre = :nombre")
+    , @NamedQuery(name = "Terminal.findByDescripcion", query = "SELECT ter FROM Terminal ter WHERE ter.descripcion = :descripcion")})
+public class Terminal implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    //@Basic(optional = false)
-    //@NotNull
-    @Column(name = "ID_ESTADO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idEstado;
+    @Column(name = "ID_TERMINAL", nullable = true, precision = 38, scale = 0)
+    private BigDecimal idTerminal;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -51,27 +50,27 @@ public class TblEstado implements Serializable {
     @Size(max = 50)
     @Column(name = "DESCRIPCION", length = 50)
     private String descripcion;
-    @OneToMany(mappedBy = "idEstado", fetch = FetchType.LAZY)
-    private List<TblPedido> tblPedidoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTerminal", fetch = FetchType.LAZY)
+    private List<PedidoUsuario> tblPedidoUsuarioList;
 
-    public TblEstado() {
+    public Terminal() {
     }
 
-    public TblEstado(BigDecimal idEstado) {
-        this.idEstado = idEstado;
+    public Terminal(BigDecimal idTerminal) {
+        this.idTerminal = idTerminal;
     }
 
-    public TblEstado(BigDecimal idEstado, String nombre) {
-        this.idEstado = idEstado;
+    public Terminal(BigDecimal idTerminal, String nombre) {
+        this.idTerminal = idTerminal;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdEstado() {
-        return idEstado;
+    public BigDecimal getIdTerminal() {
+        return idTerminal;
     }
 
-    public void setIdEstado(BigDecimal idEstado) {
-        this.idEstado = idEstado;
+    public void setIdTerminal(BigDecimal idTerminal) {
+        this.idTerminal = idTerminal;
     }
 
     public String getNombre() {
@@ -91,29 +90,29 @@ public class TblEstado implements Serializable {
     }
 
     @XmlTransient
-    public List<TblPedido> getTblPedidoList() {
-        return tblPedidoList;
+    public List<PedidoUsuario> getTblPedidoUsuarioList() {
+        return tblPedidoUsuarioList;
     }
 
-    public void setTblPedidoList(List<TblPedido> tblPedidoList) {
-        this.tblPedidoList = tblPedidoList;
+    public void setTblPedidoUsuarioList(List<PedidoUsuario> tblPedidoUsuarioList) {
+        this.tblPedidoUsuarioList = tblPedidoUsuarioList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idEstado != null ? idEstado.hashCode() : 0);
+        hash += (idTerminal != null ? idTerminal.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblEstado)) {
+        if (!(object instanceof Terminal)) {
             return false;
         }
-        TblEstado other = (TblEstado) object;
-        if ((this.idEstado == null && other.idEstado != null) || (this.idEstado != null && !this.idEstado.equals(other.idEstado))) {
+        Terminal other = (Terminal) object;
+        if ((this.idTerminal == null && other.idTerminal != null) || (this.idTerminal != null && !this.idTerminal.equals(other.idTerminal))) {
             return false;
         }
         return true;

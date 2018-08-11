@@ -35,16 +35,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @UniqueConstraint(columnNames = {"NOMBRE_USUARIO"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TblUsuario.findAll", query = "SELECT t FROM TblUsuario t")
-    , @NamedQuery(name = "TblUsuario.findByIdUsuario", query = "SELECT t FROM TblUsuario t WHERE t.idUsuario = :idUsuario")
-    , @NamedQuery(name = "TblUsuario.findByNombreUsuario", query = "SELECT t FROM TblUsuario t WHERE t.nombreUsuario = :nombreUsuario")
-    , @NamedQuery(name = "TblUsuario.findByContrasena", query = "SELECT t FROM TblUsuario t WHERE t.contrasena = :contrasena")
-    , @NamedQuery(name = TblUsuario.VALIDATE_USER, query = "SELECT t FROM TblUsuario t WHERE t.nombreUsuario = :username AND t.contrasena = :contrasena")
-    , @NamedQuery(name = "TblUsuario.findByNombre", query = "SELECT t FROM TblUsuario t WHERE t.nombre = :nombre")})
-public class TblUsuario implements Serializable {
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT usr FROM Usuario usr")
+    , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT usr FROM Usuario usr WHERE usr.idUsuario = :idUsuario")
+    , @NamedQuery(name = "Usuario.findByNombreUsuario", query = "SELECT usr FROM Usuario usr WHERE usr.nombreUsuario = :nombreUsuario")
+    , @NamedQuery(name = "Usuario.findByContrasena", query = "SELECT usr FROM Usuario usr WHERE usr.contrasena = :contrasena")
+    , @NamedQuery(name = Usuario.VALIDATE_USER, query = "SELECT usr FROM Usuario usr WHERE usr.nombreUsuario = :username AND usr.contrasena = :contrasena")
+    , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT usr FROM Usuario usr WHERE usr.nombre = :nombre")})
+public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final String VALIDATE_USER = "TblUsuario.validateuser";
+    public static final String VALIDATE_USER = "Usuario.validateuser";
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_USUARIO", nullable = true, precision = 38, scale = 0)
@@ -65,21 +65,21 @@ public class TblUsuario implements Serializable {
     @Column(name = "NOMBRE", nullable = false, length = 50)
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
-    private List<TblPermisoUsuario> tblPermisoUsuarioList;
+    private List<PermisoUsuario> tblPermisoUsuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
-    private List<TblPedidoUsuario> tblPedidoUsuarioList;
+    private List<PedidoUsuario> tblPedidoUsuarioList;
     @JoinColumn(name = "ID_ROL", referencedColumnName = "ID_ROL", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TblRol idRol;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Rol idRol;
 
-    public TblUsuario() {
+    public Usuario() {
     }
 
-    public TblUsuario(BigDecimal idUsuario) {
+    public Usuario(BigDecimal idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public TblUsuario(BigDecimal idUsuario, String nombreUsuario, String contrasena, String nombre) {
+    public Usuario(BigDecimal idUsuario, String nombreUsuario, String contrasena, String nombre) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
@@ -119,28 +119,28 @@ public class TblUsuario implements Serializable {
     }
 
     @XmlTransient
-    public List<TblPermisoUsuario> getTblPermisoUsuarioList() {
+    public List<PermisoUsuario> getTblPermisoUsuarioList() {
         return tblPermisoUsuarioList;
     }
 
-    public void setTblPermisoUsuarioList(List<TblPermisoUsuario> tblPermisoUsuarioList) {
+    public void setTblPermisoUsuarioList(List<PermisoUsuario> tblPermisoUsuarioList) {
         this.tblPermisoUsuarioList = tblPermisoUsuarioList;
     }
 
     @XmlTransient
-    public List<TblPedidoUsuario> getTblPedidoUsuarioList() {
+    public List<PedidoUsuario> getTblPedidoUsuarioList() {
         return tblPedidoUsuarioList;
     }
 
-    public void setTblPedidoUsuarioList(List<TblPedidoUsuario> tblPedidoUsuarioList) {
+    public void setTblPedidoUsuarioList(List<PedidoUsuario> tblPedidoUsuarioList) {
         this.tblPedidoUsuarioList = tblPedidoUsuarioList;
     }
 
-    public TblRol getIdRol() {
+    public Rol getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(TblRol idRol) {
+    public void setIdRol(Rol idRol) {
         this.idRol = idRol;
     }
 
@@ -154,10 +154,10 @@ public class TblUsuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TblUsuario)) {
+        if (!(object instanceof Usuario)) {
             return false;
         }
-        TblUsuario other = (TblUsuario) object;
+        Usuario other = (Usuario) object;
         if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
             return false;
         }

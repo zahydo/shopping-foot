@@ -10,14 +10,11 @@
 
         <p:dialog id="TblPedidoCreateDlg" widgetVar="TblPedidoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePedidos.CreateTblPedidoTitle}">
             <h:form id="TblPedidoCreateForm">
+                <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"/>
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tblPedidoController.selected != null}">
                         <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_cantidad}" for="cantidad" />
                         <p:inputText id="cantidad" value="#{tblPedidoController.selected.cantidad}" title="#{bundlePedidos.CreateTblPedidoTitle_cantidad}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_cantidad}"/>
-                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_valorTotal}" for="valorTotal" />
-                        <p:inputText id="valorTotal" value="#{tblPedidoController.selected.valorTotal}" title="#{bundlePedidos.CreateTblPedidoTitle_valorTotal}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_valorTotal}"/>
-                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_domicilio}" for="domicilio" />
-                        <p:inputText id="domicilio" value="#{tblPedidoController.selected.domicilio}" title="#{bundlePedidos.CreateTblPedidoTitle_domicilio}" required="true" requiredMessage="#{bundlePedidos.CreateTblPedidoRequiredMessage_domicilio}"/>
                         <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_idCliente}" for="idCliente" />
                         <p:selectOneMenu id="idCliente" value="#{tblPedidoController.selected.idCliente}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_idCliente}">
                             <f:selectItems value="#{tblClienteController.itemsAvailableSelectOne}"

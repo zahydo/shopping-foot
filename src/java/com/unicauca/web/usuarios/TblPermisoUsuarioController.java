@@ -1,6 +1,6 @@
 package com.unicauca.web.usuarios;
 
-import com.unicauca.entidades.TblPermisoUsuario;
+import com.unicauca.entidades.PermisoUsuario;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
 import com.unicauca.ejbs.usuarios.TblPermisoUsuarioFacade;
@@ -25,17 +25,17 @@ public class TblPermisoUsuarioController implements Serializable {
 
     @EJB
     private com.unicauca.ejbs.usuarios.TblPermisoUsuarioFacade ejbFacade;
-    private List<TblPermisoUsuario> items = null;
-    private TblPermisoUsuario selected;
+    private List<PermisoUsuario> items = null;
+    private PermisoUsuario selected;
 
     public TblPermisoUsuarioController() {
     }
 
-    public TblPermisoUsuario getSelected() {
+    public PermisoUsuario getSelected() {
         return selected;
     }
 
-    public void setSelected(TblPermisoUsuario selected) {
+    public void setSelected(PermisoUsuario selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class TblPermisoUsuarioController implements Serializable {
         return ejbFacade;
     }
 
-    public TblPermisoUsuario prepareCreate() {
-        selected = new TblPermisoUsuario();
+    public PermisoUsuario prepareCreate() {
+        selected = new PermisoUsuario();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class TblPermisoUsuarioController implements Serializable {
         }
     }
 
-    public List<TblPermisoUsuario> getItems() {
+    public List<PermisoUsuario> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class TblPermisoUsuarioController implements Serializable {
         }
     }
 
-    public TblPermisoUsuario getTblPermisoUsuario(java.math.BigDecimal id) {
+    public PermisoUsuario getTblPermisoUsuario(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
 
-    public List<TblPermisoUsuario> getItemsAvailableSelectMany() {
+    public List<PermisoUsuario> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TblPermisoUsuario> getItemsAvailableSelectOne() {
+    public List<PermisoUsuario> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TblPermisoUsuario.class)
+    @FacesConverter(forClass = PermisoUsuario.class)
     public static class TblPermisoUsuarioControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class TblPermisoUsuarioController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblPermisoUsuario) {
-                TblPermisoUsuario o = (TblPermisoUsuario) object;
+            if (object instanceof PermisoUsuario) {
+                PermisoUsuario o = (PermisoUsuario) object;
                 return getStringKey(o.getIdPermisoUsuario());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblPermisoUsuario.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), PermisoUsuario.class.getName()});
                 return null;
             }
         }

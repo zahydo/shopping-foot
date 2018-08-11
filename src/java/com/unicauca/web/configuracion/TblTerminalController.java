@@ -1,6 +1,6 @@
 package com.unicauca.web.configuracion;
 
-import com.unicauca.entidades.TblTerminal;
+import com.unicauca.entidades.Terminal;
 import com.unicauca.ejbs.configuracion.TblTerminalFacade;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
@@ -25,17 +25,17 @@ public class TblTerminalController implements Serializable {
 
     @EJB
     private com.unicauca.ejbs.configuracion.TblTerminalFacade ejbFacade;
-    private List<TblTerminal> items = null;
-    private TblTerminal selected;
+    private List<Terminal> items = null;
+    private Terminal selected;
 
     public TblTerminalController() {
     }
 
-    public TblTerminal getSelected() {
+    public Terminal getSelected() {
         return selected;
     }
 
-    public void setSelected(TblTerminal selected) {
+    public void setSelected(Terminal selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class TblTerminalController implements Serializable {
         return ejbFacade;
     }
 
-    public TblTerminal prepareCreate() {
-        selected = new TblTerminal();
+    public Terminal prepareCreate() {
+        selected = new Terminal();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class TblTerminalController implements Serializable {
         }
     }
 
-    public List<TblTerminal> getItems() {
+    public List<Terminal> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class TblTerminalController implements Serializable {
         }
     }
 
-    public TblTerminal getTblTerminal(java.math.BigDecimal id) {
+    public Terminal getTblTerminal(java.math.BigDecimal id) {
         return getFacade().find(id);
     }
 
-    public List<TblTerminal> getItemsAvailableSelectMany() {
+    public List<Terminal> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TblTerminal> getItemsAvailableSelectOne() {
+    public List<Terminal> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TblTerminal.class)
+    @FacesConverter(forClass = Terminal.class)
     public static class TblTerminalControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class TblTerminalController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TblTerminal) {
-                TblTerminal o = (TblTerminal) object;
+            if (object instanceof Terminal) {
+                Terminal o = (Terminal) object;
                 return getStringKey(o.getIdTerminal());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TblTerminal.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Terminal.class.getName()});
                 return null;
             }
         }
