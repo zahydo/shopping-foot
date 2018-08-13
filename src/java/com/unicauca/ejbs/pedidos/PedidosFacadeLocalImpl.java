@@ -5,22 +5,24 @@
  */
 package com.unicauca.ejbs.pedidos;
 
-import com.unicauca.ejbs.productos.TblProductoFacade;
+import com.unicauca.ejbs.configuracion.TblEstadoFacade;
+import com.unicauca.ejbs.configuracion.TblTerminalFacade;
 import com.unicauca.entidades.Cliente;
+import com.unicauca.entidades.Estado;
 import com.unicauca.entidades.Pedido;
+import com.unicauca.entidades.PedidoUsuario;
 import com.unicauca.entidades.Producto;
+import com.unicauca.entidades.Terminal;
 import com.unicauca.entidades.Usuario;
+import com.unicauca.entidades.util.CodigosUtil;
 import com.unicauca.interfaces.PedidosFacadeLocal;
 import com.unicauca.interfaces.ProductosFacadeLocal;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 
 /**
  *
@@ -28,17 +30,17 @@ import javax.persistence.Query;
  */
 @Stateless
 public class PedidosFacadeLocalImpl implements PedidosFacadeLocal {
+
     @EJB
     private TblPedidoFacade pedidoFacade;
     @EJB
     private TblPedidoUsuarioFacade pedidoUsuarioFacade;
     @EJB
     private ProductosFacadeLocal productoFacade;
-    
-    @Override
-    public Pedido guardarPedido(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    @EJB
+    private TblTerminalFacade terminalFacade;
+    @EJB
+    private TblEstadoFacade estadoFacade;
 
     @Override
     public Pedido asignarPedido(Usuario usuario, Pedido pedido) {
@@ -48,16 +50,6 @@ public class PedidosFacadeLocalImpl implements PedidosFacadeLocal {
     @Override
     public List<Pedido> obtenerPedidosPorUsuario(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Pedido> obtenerPedidosPorCliente(Cliente cliente) {
-        EntityManager em = pedidoFacade.getEntityManager();
-        String consulta = "SELECT p FROM Pedido p WHERE p.idCliente = ?1";
-        Query query = em.createQuery(consulta);
-        query.setParameter(1, cliente.getIdCliente());
-        List<Pedido> lista = query.getResultList();
-        return lista;
     }
 
     @Override
@@ -71,32 +63,72 @@ public class PedidosFacadeLocalImpl implements PedidosFacadeLocal {
     }
 
     @Override
-    public Pedido buscarPedido(BigDecimal id) {
+    public Pedido buscarPedido(Long id) {
         return pedidoFacade.find(id);
     }
 
     @Override
-    public void editarPedido(Pedido pedido) {
-        if (pedido.getIdPedido() != null) {
-            pedidoFacade.edit(pedido);
-        } else {
-            pedido.setValorTotal(pedido.getCantidad() * pedido.getIdProducto().getValor());
-            pedido.setDomicilio("En restaurante");
-            Producto producto = productoFacade.buscarProducto(pedido.getIdProducto().getIdProducto());
-            if (producto.getDisponibles() > pedido.getCantidad()) {
-                producto.setDisponibles(producto.getDisponibles()-pedido.getCantidad());
-                productoFacade.editarProducto(producto);
-                pedido.setIdProducto(producto);
-                pedidoFacade.edit(pedido);
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contact admin."));
-            }
+    public Pedido editarPedido(Pedido pedido, Usuario usuario) {
+        pedidoFacade.edit(pedido);
+        return pedido;
+    }
+
+    @Override
+    public boolean eliminarPedido(Pedido pedido, Usuario usuario) {
+        try {
+            pedidoFacade.remove(pedido);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
     @Override
-    public void eliminarPedido(Pedido pedido) {
-        pedidoFacade.remove(pedido);
+    public Pedido guardarPedido(Pedido pedido, Usuario usuario) {
+        pedido.setValorTotal(pedido.getCantidad() * pedido.getIdProducto().getValor());
+        pedido.setDomicilio("En restaurante");
+        Producto producto = productoFacade.buscarProducto(pedido.getIdProducto().getIdProducto());
+        PedidoUsuario pedUsuario = new PedidoUsuario();
+        pedUsuario.setIdPedido(pedido);
+        pedUsuario.setIdUsuario(usuario);
+        Terminal terminal;
+        Estado estado;
+        switch(usuario.getIdRol().getIdRol().intValue()){
+            case (int)CodigosUtil.ROL_COCINERO:
+                terminal = terminalFacade.find(CodigosUtil.TERMINAL_COCINA);
+                estado = estadoFacade.find(CodigosUtil.ESTADO_EN_PROCESO);
+                break;
+            case (int)CodigosUtil.ROL_DESPACHADOR:
+                terminal = terminalFacade.find(CodigosUtil.TERMINAL_DESPACHO);
+                estado = estadoFacade.find(CodigosUtil.ESTADO_DESPACHADO);
+                break;
+            default:
+                terminal = terminalFacade.find(CodigosUtil.TERMINAL_CAJA);
+                estado = estadoFacade.find(CodigosUtil.ESTADO_EN_COLA);
+                break;                
+        }
+        pedUsuario.setIdTerminal(terminal);
+        List<PedidoUsuario> relacionConUsuario = new ArrayList<>();
+        pedido.setPedidoUsuarioList(relacionConUsuario);
+        pedido.setIdEstado(estado);
+        if (producto.getDisponibles() > pedido.getCantidad()) {
+            producto.setDisponibles(producto.getDisponibles() - pedido.getCantidad());
+            productoFacade.editarProducto(producto);
+            pedido.setIdProducto(producto);
+            pedidoFacade.edit(pedido);
+        } else {
+            return null;
+        }
+        return pedido;
     }
-    
+
+    @Override
+    public List<Pedido> obtenerPedidosPorCliente(Cliente cliente) {
+        EntityManager em = pedidoFacade.getEntityManager();
+        String consulta = "SELECT p FROM Pedido p WHERE p.idCliente = ?1";
+        Query query = em.createQuery(consulta);
+        query.setParameter(1, cliente.getIdCliente());
+        List<Pedido> lista = query.getResultList();
+        return lista;
+    }
 }

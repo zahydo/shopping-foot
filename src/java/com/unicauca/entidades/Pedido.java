@@ -6,7 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -44,7 +43,7 @@ public class Pedido implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_PEDIDO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idPedido;
+    private Long idPedido;
     @Basic(optional = false)
     @NotNull
     @Column(name = "CANTIDAD", nullable = false)
@@ -72,22 +71,22 @@ public class Pedido implements Serializable {
     public Pedido() {
     }
 
-    public Pedido(BigDecimal idPedido) {
+    public Pedido(Long idPedido) {
         this.idPedido = idPedido;
     }
 
-    public Pedido(BigDecimal idPedido, Long cantidad, Long valorTotal, String domicilio) {
+    public Pedido(Long idPedido, Long cantidad, Long valorTotal, String domicilio) {
         this.idPedido = idPedido;
         this.cantidad = cantidad;
         this.valorTotal = valorTotal;
         this.domicilio = domicilio;
     }
 
-    public BigDecimal getIdPedido() {
+    public Long getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(BigDecimal idPedido) {
+    public void setIdPedido(Long idPedido) {
         this.idPedido = idPedido;
     }
 

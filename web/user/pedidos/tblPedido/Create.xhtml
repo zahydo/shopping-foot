@@ -21,12 +21,6 @@
                                            var="idClienteItem"
                                            itemValue="#{idClienteItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_idEstado}" for="idEstado" />
-                        <p:selectOneMenu id="idEstado" value="#{tblPedidoController.selected.idEstado}" >
-                            <f:selectItems value="#{tblEstadoController.itemsAvailableSelectOne}"
-                                           var="idEstadoItem"
-                                           itemValue="#{idEstadoItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePedidos.CreateTblPedidoLabel_idProducto}" for="idProducto" />
                         <p:selectOneMenu id="idProducto" value="#{tblPedidoController.selected.idProducto}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_idProducto}">
                             <f:selectItems value="#{tblProductoController.itemsAvailableSelectOne}"

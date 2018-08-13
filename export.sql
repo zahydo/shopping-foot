@@ -1,5 +1,5 @@
 --------------------------------------------------------
--- Archivo creado  - sábado-agosto-11-2018   
+-- Archivo creado  - domingo-agosto-12-2018   
 --------------------------------------------------------
   DROP TABLE "VENDEDOR"."TBL_CATEGORIA" cascade constraints;
   DROP TABLE "VENDEDOR"."TBL_CLIENTE" cascade constraints;
@@ -60,7 +60,7 @@
 --  DDL for Sequence TBL_PEDIDO_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "VENDEDOR"."TBL_PEDIDO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "VENDEDOR"."TBL_PEDIDO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Sequence TBL_PEDIDO_USUARIO_SEQ
 --------------------------------------------------------
@@ -323,11 +323,12 @@ Insert into VENDEDOR.TBL_CATEGORIA (ID_CATEGORIA,NOMBRE,DESCRIPCION) values (3,'
 REM INSERTING into VENDEDOR.TBL_CLIENTE
 Insert into VENDEDOR.TBL_CLIENTE (ID_CLIENTE,IDENTIFICACION,EMAIL,NOMBRE,DIRECCION,TELEFONO) values (1,'25706942','algo@gmail.com','Maria','Timbio cauca','3176349898');
 REM INSERTING into VENDEDOR.TBL_ESTADO
-Insert into VENDEDOR.TBL_ESTADO (ID_ESTADO,NOMBRE,DESCRIPCION) values (6,'Devuelto','El pedido ha sido devuelto');
+Insert into VENDEDOR.TBL_ESTADO (ID_ESTADO,NOMBRE,DESCRIPCION) values (3,'Devuelto','El pedido ha sido devuelto');
 Insert into VENDEDOR.TBL_ESTADO (ID_ESTADO,NOMBRE,DESCRIPCION) values (1,'En cola','El pedido esta en cola de atencion');
 Insert into VENDEDOR.TBL_ESTADO (ID_ESTADO,NOMBRE,DESCRIPCION) values (2,'En proceso','El pedido esta en proceso');
 Insert into VENDEDOR.TBL_ESTADO (ID_ESTADO,NOMBRE,DESCRIPCION) values (4,'Entregado','El pedido ha sido entregado');
 Insert into VENDEDOR.TBL_ESTADO (ID_ESTADO,NOMBRE,DESCRIPCION) values (5,'Cancelado','El pedido ha sido cancelado');
+Insert into VENDEDOR.TBL_ESTADO (ID_ESTADO,NOMBRE,DESCRIPCION) values (6,'Despachado','El pedido ha sido despachado de la tienda');
 REM INSERTING into VENDEDOR.TBL_INGREDIENTE
 Insert into VENDEDOR.TBL_INGREDIENTE (ID_INGREDIENTE,NOMBRE,DESCRIPCION) values (1,'Cebolla','Cebolla en rodajas');
 Insert into VENDEDOR.TBL_INGREDIENTE (ID_INGREDIENTE,NOMBRE,DESCRIPCION) values (2,'Arroz','Arroz normal en tasa');
@@ -335,8 +336,7 @@ Insert into VENDEDOR.TBL_INGREDIENTE (ID_INGREDIENTE,NOMBRE,DESCRIPCION) values 
 REM INSERTING into VENDEDOR.TBL_INGREDIENTE_PRODUCTO
 Insert into VENDEDOR.TBL_INGREDIENTE_PRODUCTO (ID_INGREDIENTE_PRODUCTO,ID_INGREDIENTE,ID_PRODUCTO,GRAMOS) values (1,1,1,100);
 REM INSERTING into VENDEDOR.TBL_PEDIDO
-Insert into VENDEDOR.TBL_PEDIDO (ID_PEDIDO,ID_CLIENTE,ID_PRODUCTO,ID_ESTADO,CANTIDAD,VALOR_TOTAL,DOMICILIO) values (22,1,1,6,5,400000,'En restaurante');
-Insert into VENDEDOR.TBL_PEDIDO (ID_PEDIDO,ID_CLIENTE,ID_PRODUCTO,ID_ESTADO,CANTIDAD,VALOR_TOTAL,DOMICILIO) values (23,1,1,6,2,160000,'En restaurante');
+Insert into VENDEDOR.TBL_PEDIDO (ID_PEDIDO,ID_CLIENTE,ID_PRODUCTO,ID_ESTADO,CANTIDAD,VALOR_TOTAL,DOMICILIO) values (63,1,2,1,1,6000,'En restaurante');
 REM INSERTING into VENDEDOR.TBL_PEDIDO_USUARIO
 REM INSERTING into VENDEDOR.TBL_PERMISO
 Insert into VENDEDOR.TBL_PERMISO (ID_PERMISO,NOMBRE,DESCRIPCION) values (5,'Administrador','Puege realizar todas las configuraciones');
@@ -347,7 +347,8 @@ Insert into VENDEDOR.TBL_PERMISO (ID_PERMISO,NOMBRE,DESCRIPCION) values (3,'Usua
 REM INSERTING into VENDEDOR.TBL_PERMISO_USUARIO
 Insert into VENDEDOR.TBL_PERMISO_USUARIO (ID_PERMISO_USUARIO,ID_PERMISO,ID_USUARIO,NOMBRE_USUARIO) values (10,1,5,'admin');
 REM INSERTING into VENDEDOR.TBL_PRODUCTO
-Insert into VENDEDOR.TBL_PRODUCTO (ID_PRODUCTO,NOMBRE,DESCRIPCION,VALOR,DISPONIBLES,ID_CATEGORIA) values (1,'Hamburguesa','Hamburguesa sencilla',80000,10,1);
+Insert into VENDEDOR.TBL_PRODUCTO (ID_PRODUCTO,NOMBRE,DESCRIPCION,VALOR,DISPONIBLES,ID_CATEGORIA) values (1,'Hamburguesa','Hamburguesa sencilla',80000,1,1);
+Insert into VENDEDOR.TBL_PRODUCTO (ID_PRODUCTO,NOMBRE,DESCRIPCION,VALOR,DISPONIBLES,ID_CATEGORIA) values (2,'Perro caliente','Perro caliente sencillo',6000,7,1);
 REM INSERTING into VENDEDOR.TBL_PRODUCTO_TIENDA
 REM INSERTING into VENDEDOR.TBL_ROL
 Insert into VENDEDOR.TBL_ROL (ID_ROL,NOMBRE,DESCRIPCION) values (1,'Cajero','Persona que recibe el dinero de un pedido');
@@ -358,18 +359,18 @@ Insert into VENDEDOR.TBL_ROL (ID_ROL,NOMBRE,DESCRIPCION) values (5,'Administrado
 Insert into VENDEDOR.TBL_ROL (ID_ROL,NOMBRE,DESCRIPCION) values (6,'Configurador','Configura opciones generales');
 REM INSERTING into VENDEDOR.TBL_TERMINAL
 Insert into VENDEDOR.TBL_TERMINAL (ID_TERMINAL,NOMBRE,DESCRIPCION) values (4,'Devoluciones','Indica que el pedido está en devolución');
-Insert into VENDEDOR.TBL_TERMINAL (ID_TERMINAL,NOMBRE,DESCRIPCION) values (1,' Caja','Indica que el pedido aún esta en facturacion');
+Insert into VENDEDOR.TBL_TERMINAL (ID_TERMINAL,NOMBRE,DESCRIPCION) values (1,'Caja','Indica que el pedido aún esta en facturacion');
 Insert into VENDEDOR.TBL_TERMINAL (ID_TERMINAL,NOMBRE,DESCRIPCION) values (2,'Despacho','Indica que el pedido esta por despachar');
 Insert into VENDEDOR.TBL_TERMINAL (ID_TERMINAL,NOMBRE,DESCRIPCION) values (3,'Cocina','Indica que el pedido esta en cocina');
 REM INSERTING into VENDEDOR.TBL_TIENDA
 Insert into VENDEDOR.TBL_TIENDA (ID_TIENDA,NOMBRE,DESCRIPCION) values (1,'Mi restaurante','Tienda donde venden comida de todo tipo');
 REM INSERTING into VENDEDOR.TBL_USUARIO
-Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (4,'despachador','186bca7826f8aeb9aa3eb12928329389','Usuario despachador',4);
-Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (3,'mesero','186bca7826f8aeb9aa3eb12928329389','Usuario Mesero',3);
-Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (5,'cajero','123123','Usuario Cajero',1);
-Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (6,'configurador','186bca7826f8aeb9aa3eb12928329389','Usuario Configurador',6);
-Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (2,'cocinero','186bca7826f8aeb9aa3eb12928329389','Usuaro cocinero',2);
-Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','Santiago admin',5);
+Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (4,'despachador','4297f44b13955235245b2497399d7a93','Usuario despachador',4);
+Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (3,'mesero','4297f44b13955235245b2497399d7a93','Usuario Mesero',3);
+Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (5,'cajero','4297f44b13955235245b2497399d7a93','Usuario Cajero',1);
+Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (6,'configurador','4297f44b13955235245b2497399d7a93','Usuario Configurador',6);
+Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (2,'cocinero','4297f44b13955235245b2497399d7a93','Usuaro cocinero',2);
+Insert into VENDEDOR.TBL_USUARIO (ID_USUARIO,NOMBRE_USUARIO,CONTRASENA,NOMBRE,ID_ROL) values (1,'admin','4297f44b13955235245b2497399d7a93','Santiago admin',5);
 --------------------------------------------------------
 --  DDL for Index TBL_CATEGORIA_PK
 --------------------------------------------------------

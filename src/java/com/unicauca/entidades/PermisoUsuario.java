@@ -6,7 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +36,7 @@ public class PermisoUsuario implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_PERMISO_USUARIO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idPermisoUsuario;
+    private Long idPermisoUsuario;
     @JoinColumn(name = "ID_PERMISO", referencedColumnName = "ID_PERMISO")
     @ManyToOne(fetch = FetchType.LAZY)
     private Permiso idPermiso;
@@ -53,15 +52,15 @@ public class PermisoUsuario implements Serializable {
     public PermisoUsuario() {
     }
 
-    public PermisoUsuario(BigDecimal idPermisoUsuario) {
+    public PermisoUsuario(Long idPermisoUsuario) {
         this.idPermisoUsuario = idPermisoUsuario;
     }
 
-    public BigDecimal getIdPermisoUsuario() {
+    public Long getIdPermisoUsuario() {
         return idPermisoUsuario;
     }
 
-    public void setIdPermisoUsuario(BigDecimal idPermisoUsuario) {
+    public void setIdPermisoUsuario(Long idPermisoUsuario) {
         this.idPermisoUsuario = idPermisoUsuario;
     }
 

@@ -4,6 +4,7 @@ import com.unicauca.entidades.Usuario;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
 import com.unicauca.ejbs.usuarios.TblUsuarioFacade;
+import com.unicauca.web.util.EncrypterUtil;
 
 import java.io.Serializable;
 import java.util.List;
@@ -84,6 +85,7 @@ public class TblUsuarioController implements Serializable{
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
+            this.selected.setContrasena(EncrypterUtil.encriptarMD5(selected.getContrasena()));
             try {
                 if (persistAction != PersistAction.DELETE) {
                     getFacade().edit(selected);
@@ -109,7 +111,7 @@ public class TblUsuarioController implements Serializable{
         }
     }
 
-    public Usuario getTblUsuario(java.math.BigDecimal id) {
+    public Usuario getTblUsuario(Long id) {
         return getFacade().find(id);
     }
 
@@ -134,13 +136,13 @@ public class TblUsuarioController implements Serializable{
             return controller.getTblUsuario(getKey(value));
         }
 
-        java.math.BigDecimal getKey(String value) {
-            java.math.BigDecimal key;
-            key = new java.math.BigDecimal(value);
+        Long getKey(String value) {
+            Long key;
+            key = new Long(value);
             return key;
         }
 
-        String getStringKey(java.math.BigDecimal value) {
+        String getStringKey(Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

@@ -16,10 +16,10 @@ import java.util.List;
  */
 public interface PedidosFacadeLocal {
     List<Pedido> buscarTodosLosPedidos();
-    Pedido buscarPedido(java.math.BigDecimal id);
-    void editarPedido(Pedido pedido);
-    Pedido guardarPedido(Pedido pedido);
-    void eliminarPedido(Pedido pedido);
+    Pedido buscarPedido(Long id);
+    Pedido editarPedido(Pedido pedido, Usuario usuario);
+    Pedido guardarPedido(Pedido pedido, Usuario usuario);
+    boolean eliminarPedido(Pedido pedido, Usuario usuario);
     Pedido asignarPedido(Usuario usuario, Pedido pedido);
     List<Pedido> obtenerPedidosPorUsuario(Usuario usuario);
     List<Pedido> obtenerPedidosPorCliente(Cliente cliente);

@@ -6,8 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,7 +33,7 @@ public class PedidoUsuario implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_PEDIDO_USUARIO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idPedidoUsuario;
+    private Long idPedidoUsuario;
     @JoinColumn(name = "ID_PEDIDO", referencedColumnName = "ID_PEDIDO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pedido idPedido;
@@ -50,15 +47,15 @@ public class PedidoUsuario implements Serializable {
     public PedidoUsuario() {
     }
 
-    public PedidoUsuario(BigDecimal idPedidoUsuario) {
+    public PedidoUsuario(Long idPedidoUsuario) {
         this.idPedidoUsuario = idPedidoUsuario;
     }
 
-    public BigDecimal getIdPedidoUsuario() {
+    public Long getIdPedidoUsuario() {
         return idPedidoUsuario;
     }
 
-    public void setIdPedidoUsuario(BigDecimal idPedidoUsuario) {
+    public void setIdPedidoUsuario(Long idPedidoUsuario) {
         this.idPedidoUsuario = idPedidoUsuario;
     }
 

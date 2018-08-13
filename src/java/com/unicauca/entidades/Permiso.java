@@ -6,7 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -42,7 +41,7 @@ public class Permiso implements Serializable {
     //@Basic(optional = false)
     //@NotNull
     @Column(name = "ID_PERMISO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idPermiso;
+    private Long idPermiso;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -57,20 +56,20 @@ public class Permiso implements Serializable {
     public Permiso() {
     }
 
-    public Permiso(BigDecimal idPermiso) {
+    public Permiso(Long idPermiso) {
         this.idPermiso = idPermiso;
     }
 
-    public Permiso(BigDecimal idPermiso, String nombre) {
+    public Permiso(Long idPermiso, String nombre) {
         this.idPermiso = idPermiso;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdPermiso() {
+    public Long getIdPermiso() {
         return idPermiso;
     }
 
-    public void setIdPermiso(BigDecimal idPermiso) {
+    public void setIdPermiso(Long idPermiso) {
         this.idPermiso = idPermiso;
     }
 

@@ -6,7 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -38,7 +37,7 @@ public class IngredienteProducto implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_INGREDIENTE_PRODUCTO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idIngredienteProducto;
+    private Long idIngredienteProducto;
     @Basic(optional = false)
     @NotNull
     @Column(name = "GRAMOS", nullable = false)
@@ -53,20 +52,20 @@ public class IngredienteProducto implements Serializable {
     public IngredienteProducto() {
     }
 
-    public IngredienteProducto(BigDecimal idIngredienteProducto) {
+    public IngredienteProducto(Long idIngredienteProducto) {
         this.idIngredienteProducto = idIngredienteProducto;
     }
 
-    public IngredienteProducto(BigDecimal idIngredienteProducto, BigInteger gramos) {
+    public IngredienteProducto(Long idIngredienteProducto, BigInteger gramos) {
         this.idIngredienteProducto = idIngredienteProducto;
         this.gramos = gramos;
     }
 
-    public BigDecimal getIdIngredienteProducto() {
+    public Long getIdIngredienteProducto() {
         return idIngredienteProducto;
     }
 
-    public void setIdIngredienteProducto(BigDecimal idIngredienteProducto) {
+    public void setIdIngredienteProducto(Long idIngredienteProducto) {
         this.idIngredienteProducto = idIngredienteProducto;
     }
 

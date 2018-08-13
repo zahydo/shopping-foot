@@ -49,28 +49,35 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundlePedidos.ListTblPedidoTitle_idCliente}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idCliente}"/>
+                            <h:outputText value="#{item.idCliente.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundlePedidos.ListTblPedidoTitle_idEstado}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idEstado}"/>
+                            <h:outputText value="#{item.idEstado.descripcion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundlePedidos.ListTblPedidoTitle_idProducto}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idProducto}"/>
+                            <h:outputText value="#{item.idProducto.descripcion}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlePedidos.Create}" actionListener="#{tblPedidoController.prepareCreate}" update=":TblPedidoCreateForm" oncomplete="PF('TblPedidoCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePedidos.View}" update=":TblPedidoViewForm" oncomplete="PF('TblPedidoViewDialog').show()" disabled="#{empty tblPedidoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlePedidos.Edit}" update=":TblPedidoEditForm" oncomplete="PF('TblPedidoEditDialog').show()" disabled="#{empty tblPedidoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlePedidos.Delete}" actionListener="#{tblPedidoController.destroy}" update=":growl,datalist" disabled="#{empty tblPedidoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlePedidos.Delete}" actionListener="#{tblPedidoController.destroy}" update=":growl,datalist" disabled="#{empty tblPedidoController.selected}">
+                                <p:confirm header="Confirmación" message="¿Estas seguro de eliminar este registro?" icon="ui-icon-alert" />
+                            </p:commandButton>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

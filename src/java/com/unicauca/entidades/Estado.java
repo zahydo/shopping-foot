@@ -6,7 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -42,7 +41,7 @@ public class Estado implements Serializable {
     //@Basic(optional = false)
     //@NotNull
     @Column(name = "ID_ESTADO", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idEstado;
+    private Long idEstado;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -57,20 +56,20 @@ public class Estado implements Serializable {
     public Estado() {
     }
 
-    public Estado(BigDecimal idEstado) {
+    public Estado(Long idEstado) {
         this.idEstado = idEstado;
     }
 
-    public Estado(BigDecimal idEstado, String nombre) {
+    public Estado(Long idEstado, String nombre) {
         this.idEstado = idEstado;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdEstado() {
+    public Long getIdEstado() {
         return idEstado;
     }
 
-    public void setIdEstado(BigDecimal idEstado) {
+    public void setIdEstado(Long idEstado) {
         this.idEstado = idEstado;
     }
 

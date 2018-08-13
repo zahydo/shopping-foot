@@ -110,7 +110,7 @@ public class TblCategoriaController implements Serializable {
         }
     }
 
-    public Categoria getTblCategoria(java.math.BigDecimal id) {
+    public Categoria getTblCategoria(Long id) {
         return getFacade().find(id);
     }
 
@@ -135,13 +135,13 @@ public class TblCategoriaController implements Serializable {
             return controller.getTblCategoria(getKey(value));
         }
 
-        java.math.BigDecimal getKey(String value) {
-            java.math.BigDecimal key;
-            key = new java.math.BigDecimal(value);
+        Long getKey(String value) {
+            Long key;
+            key = new Long(value);
             return key;
         }
 
-        String getStringKey(java.math.BigDecimal value) {
+        String getStringKey(Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

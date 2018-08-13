@@ -6,7 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -41,7 +40,7 @@ public class Terminal implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_TERMINAL", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idTerminal;
+    private Long idTerminal;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -56,20 +55,20 @@ public class Terminal implements Serializable {
     public Terminal() {
     }
 
-    public Terminal(BigDecimal idTerminal) {
+    public Terminal(Long idTerminal) {
         this.idTerminal = idTerminal;
     }
 
-    public Terminal(BigDecimal idTerminal, String nombre) {
+    public Terminal(Long idTerminal, String nombre) {
         this.idTerminal = idTerminal;
         this.nombre = nombre;
     }
 
-    public BigDecimal getIdTerminal() {
+    public Long getIdTerminal() {
         return idTerminal;
     }
 
-    public void setIdTerminal(BigDecimal idTerminal) {
+    public void setIdTerminal(Long idTerminal) {
         this.idTerminal = idTerminal;
     }
 

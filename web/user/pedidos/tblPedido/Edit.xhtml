@@ -14,23 +14,12 @@
                     <p:panelGrid columns="2" rendered="#{tblPedidoController.selected != null}">
                         <p:outputLabel value="#{bundlePedidos.EditTblPedidoLabel_cantidad}" for="cantidad" />
                         <p:inputText id="cantidad" value="#{tblPedidoController.selected.cantidad}" title="#{bundlePedidos.EditTblPedidoTitle_cantidad}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_cantidad}"/>
-                        <p:outputLabel value="#{bundlePedidos.EditTblPedidoLabel_valorTotal}" for="valorTotal" />
-                        <p:inputText id="valorTotal" value="#{tblPedidoController.selected.valorTotal}" title="#{bundlePedidos.EditTblPedidoTitle_valorTotal}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_valorTotal}"/>
-                        <p:outputLabel value="#{bundlePedidos.EditTblPedidoLabel_domicilio}" for="domicilio" />
-                        <p:inputText id="domicilio" value="#{tblPedidoController.selected.domicilio}" title="#{bundlePedidos.EditTblPedidoTitle_domicilio}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_domicilio}"/>
                         <p:outputLabel value="#{bundlePedidos.EditTblPedidoLabel_idCliente}" for="idCliente" />
                         <p:selectOneMenu id="idCliente" value="#{tblPedidoController.selected.idCliente}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_idCliente}">
                             <f:selectItem itemLabel="#{bundlePedidos.SelectOneMessage}"/>
                             <f:selectItems value="#{tblClienteController.itemsAvailableSelectOne}"
                                            var="idClienteItem"
                                            itemValue="#{idClienteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePedidos.EditTblPedidoLabel_idEstado}" for="idEstado" />
-                        <p:selectOneMenu id="idEstado" value="#{tblPedidoController.selected.idEstado}" >
-                            <f:selectItem itemLabel="#{bundlePedidos.SelectOneMessage}"/>
-                            <f:selectItems value="#{tblEstadoController.itemsAvailableSelectOne}"
-                                           var="idEstadoItem"
-                                           itemValue="#{idEstadoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePedidos.EditTblPedidoLabel_idProducto}" for="idProducto" />
                         <p:selectOneMenu id="idProducto" value="#{tblPedidoController.selected.idProducto}" required="true" requiredMessage="#{bundlePedidos.EditTblPedidoRequiredMessage_idProducto}">

@@ -3,7 +3,7 @@ package com.unicauca.web.pedidos;
 import com.unicauca.entidades.Pedido;
 import com.unicauca.web.util.JsfUtil;
 import com.unicauca.web.util.JsfUtil.PersistAction;
-import com.unicauca.entidades.Producto;
+import com.unicauca.web.util.SessionUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.ApplicationScoped;
-import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -62,7 +61,7 @@ public class TblPedidoController implements Serializable {
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePedidos").getString("TblPedidoUpdated"));
     }
-
+    
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePedidos").getString("TblPedidoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -83,11 +82,32 @@ public class TblPedidoController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    ejbFacade.editarPedido(selected);
+                    switch(persistAction){
+                            case CREATE:
+                                if(ejbFacade.guardarPedido(selected, SessionUtils.getUsuarioSession()) == null)
+                                    JsfUtil.addErrorMessage("No se pudo agregar el pedido");
+                                else
+                                    JsfUtil.addSuccessMessage(successMessage);
+                                break;
+                            case UPDATE:
+                                if(ejbFacade.editarPedido(selected, SessionUtils.getUsuarioSession()) == null)
+                                    JsfUtil.addErrorMessage("No se pudo agregar el pedido");
+                                else
+                                    JsfUtil.addSuccessMessage(successMessage);
+                                break;
+                            default:
+                                if(ejbFacade.editarPedido(selected, SessionUtils.getUsuarioSession()) == null)
+                                    JsfUtil.addErrorMessage("No se pudo agregar el pedido");
+                                else
+                                    JsfUtil.addSuccessMessage(successMessage);
+                                break;
+                    }
                 } else {
-                    ejbFacade.eliminarPedido(selected);
+                    if(ejbFacade.eliminarPedido(selected, SessionUtils.getUsuarioSession()))
+                        JsfUtil.addSuccessMessage(successMessage);
+                    else
+                        JsfUtil.addErrorMessage("No se pudo agregar el pedido");
                 }
-                JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -106,7 +126,7 @@ public class TblPedidoController implements Serializable {
         }
     }
 
-    public Pedido getTblPedido(java.math.BigDecimal id) {
+    public Pedido getTblPedido(Long id) {
         return ejbFacade.buscarPedido(id);
     }
 
@@ -131,13 +151,13 @@ public class TblPedidoController implements Serializable {
             return controller.getTblPedido(getKey(value));
         }
 
-        java.math.BigDecimal getKey(String value) {
-            java.math.BigDecimal key;
-            key = new java.math.BigDecimal(value);
+        Long getKey(String value) {
+            Long key;
+            key = new Long(value);
             return key;
         }
 
-        String getStringKey(java.math.BigDecimal value) {
+        String getStringKey(Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

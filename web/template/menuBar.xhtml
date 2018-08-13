@@ -10,29 +10,30 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
     <body>
         <h:form id="menuForm">
-                <p:panelMenu >
-                    <p:submenu label="#{bundle.Configuracion}"
-                               rendered="#{userSession.sesionIniciada} and #{userSession.esAdmin}"
-                               >
+                <p:panelMenu>
+                    <p:submenu label="#{bundle.Configuracion}" rendered="#{loginController.administrador or loginController.configurador}">
                         <p:menuitem value="Gestión de Estados" outcome="/admin/recursos/tblEstado/List.xhtml" />
                         <p:menuitem value="Gestión de Terminales" outcome="/admin/recursos/tblTerminal/List.xhtml" />
                     </p:submenu>
-                    <p:submenu label="#{bundle.Pedidos}">
+                    <p:separator rendered="#{loginController.administrador or loginController.configurador}"/>
+                    <p:submenu label="#{bundle.Pedidos}" rendered="#{loginController.cajero or loginController.mesero or loginController.despachador}">
                         <p:menuitem value="Gestión de Clientes" outcome="/user/pedidos/tblCliente/List.xhtml" />
                         <p:menuitem value="Gestión de Pedidos" outcome="/user/pedidos/tblPedido/List.xhtml" />
-                        <p:menuitem value="Pedidos por Usuario" outcome="/user/pedidos/tblPedidoUsuario/List.xhtml" />
                     </p:submenu>
-                    <p:submenu label="#{bundle.Productos}">
+                    <p:separator rendered="#{loginController.cajero or loginController.mesero or loginController.despachador}" />
+                    <p:submenu label="#{bundle.Productos}" rendered="#{loginController.cocinero or loginController.configurador}">
                         <p:menuitem value="Categorías de productos" outcome="/common/productos/tblCategoria/List.xhtml" />
                         <p:menuitem value="Gestión de Productos" outcome="/common/productos/tblProducto/List.xhtml" />
                         <p:menuitem value="Gestión de Ingredientes" outcome="/common/productos/tblIngrediente/List.xhtml" />
                         <p:menuitem value="Preparación de productos" outcome="/common/productos/tblIngredienteProducto/List.xhtml" />
                     </p:submenu>
-                    <p:submenu label="#{bundle.Tienda}">
+                    <p:separator rendered="#{loginController.cocinero or loginController.configurador}" />
+                    <p:submenu label="#{bundle.Tienda}" rendered="#{loginController.administrador or loginController.configurador}">
                         <p:menuitem value="Gestionar Tiendas" outcome="/admin/tienda/tblTienda/List.xhtml" />
                         <p:menuitem value="Inventario de tiendas" outcome="/admin/tienda/tblProductoTienda/List.xhtml" />
                     </p:submenu>
-                    <p:submenu label="#{bundle.Usuarios}">
+                    <p:separator rendered="#{loginController.administrador or loginController.configurador}"/>
+                    <p:submenu label="#{bundle.Usuarios}" rendered="#{loginController.administrador}">
                         <p:menuitem value="Gestión de Permisos" outcome="/admin/usuarios/tblPermiso/List.xhtml" />
                         <p:menuitem value="Gestión de Roles" outcome="/admin/usuarios/tblRol/List.xhtml" />
                         <p:menuitem value="Gestión de Usuarios" outcome="/admin/usuarios/tblUsuario/List.xhtml" />

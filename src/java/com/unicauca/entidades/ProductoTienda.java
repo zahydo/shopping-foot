@@ -6,8 +6,6 @@
 package com.unicauca.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,7 +33,7 @@ public class ProductoTienda implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Column(name = "ID_PRODUCTO_TIENDA", nullable = true, precision = 38, scale = 0)
-    private BigDecimal idProductoTienda;
+    private Long idProductoTienda;
     @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "ID_PRODUCTO", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Producto idProducto;
@@ -47,15 +44,15 @@ public class ProductoTienda implements Serializable {
     public ProductoTienda() {
     }
 
-    public ProductoTienda(BigDecimal idProductoTienda) {
+    public ProductoTienda(Long idProductoTienda) {
         this.idProductoTienda = idProductoTienda;
     }
 
-    public BigDecimal getIdProductoTienda() {
+    public Long getIdProductoTienda() {
         return idProductoTienda;
     }
 
-    public void setIdProductoTienda(BigDecimal idProductoTienda) {
+    public void setIdProductoTienda(Long idProductoTienda) {
         this.idProductoTienda = idProductoTienda;
     }
 

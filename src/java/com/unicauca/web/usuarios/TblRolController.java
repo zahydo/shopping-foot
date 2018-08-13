@@ -109,7 +109,7 @@ public class TblRolController implements Serializable {
         }
     }
 
-    public Rol getTblRol(java.math.BigDecimal id) {
+    public Rol getTblRol(Long id) {
         return getFacade().find(id);
     }
 
@@ -134,13 +134,13 @@ public class TblRolController implements Serializable {
             return controller.getTblRol(getKey(value));
         }
 
-        java.math.BigDecimal getKey(String value) {
-            java.math.BigDecimal key;
-            key = new java.math.BigDecimal(value);
+        Long getKey(String value) {
+            Long key;
+            key = new Long(value);
             return key;
         }
 
-        String getStringKey(java.math.BigDecimal value) {
+        String getStringKey(Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

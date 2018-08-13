@@ -2,6 +2,9 @@ package com.unicauca.web.usuarios;
 
 import com.unicauca.interfaces.UsuarioFacadeLocal;
 import com.unicauca.entidades.Usuario;
+import com.unicauca.entidades.util.CodigosUtil;
+import com.unicauca.web.util.EncrypterUtil;
+import com.unicauca.web.util.SessionUtils;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -36,9 +39,11 @@ public class LoginController implements Serializable {
         Usuario user;
         String redireccion = null;
         try {
+            usuario.setContrasena(EncrypterUtil.encriptarMD5(usuario.getContrasena()));
             user = ejbUsuario.inicarSesion(usuario);
             if (user != null) {
                 //Almacenar en la sesión de JSF
+                usuario = user;
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", user);
                 redireccion = "/protegido/principal";
             } else {
@@ -48,5 +53,36 @@ public class LoginController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error de validación", "No se puede iniciar sesión con esas credenciales"));
         }
         return redireccion;
+    }
+    
+    public String cerrarSesion(){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", null);
+        String redireccion = "/login";
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cierre de sesión", "Sesión cerrada satisfactoriamente"));
+        return redireccion;
+    }
+    
+    public boolean isCajero(){
+        return SessionUtils.getUsuarioSession().getIdRol().getIdRol() == CodigosUtil.ROL_CAJERO;
+    }
+
+    public boolean isMesero(){
+        return SessionUtils.getUsuarioSession().getIdRol().getIdRol() == CodigosUtil.ROL_MESERO;
+    }
+
+    public boolean isCocinero(){
+        return SessionUtils.getUsuarioSession().getIdRol().getIdRol() == CodigosUtil.ROL_COCINERO;
+    }
+
+    public boolean isDespachador(){
+        return SessionUtils.getUsuarioSession().getIdRol().getIdRol() == CodigosUtil.ROL_DESPACHADOR;
+    }
+
+    public boolean isAdministrador(){
+        return SessionUtils.getUsuarioSession().getIdRol().getIdRol() == CodigosUtil.ROL_ADMINISTRADOR;
+    }
+
+    public boolean isConfigurador(){
+        return SessionUtils.getUsuarioSession().getIdRol().getIdRol() == CodigosUtil.ROL_CONFIGURADOR;
     }
 }
