@@ -1,6 +1,5 @@
 package com.unicauca.presentacion.web.usuarios;
 
-import com.unicauca.modelo.interfaces.UsuarioFacadeLocal;
 import com.unicauca.accesodatos.entidades.Usuario;
 import com.unicauca.accesodatos.entidades.util.CodigosUtil;
 import com.unicauca.presentacion.web.util.EncrypterUtil;
@@ -13,13 +12,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import com.unicauca.modelo.interfaces.UsuariosFacadeLocal;
 
 @Named("loginController")
 @ViewScoped
 public class LoginController implements Serializable {
 
     @EJB
-    private UsuarioFacadeLocal ejbUsuario;
+    private UsuariosFacadeLocal ejbUsuario;
     private Usuario usuario;
     
     @PostConstruct

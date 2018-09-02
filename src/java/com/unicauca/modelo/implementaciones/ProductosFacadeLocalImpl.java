@@ -7,6 +7,9 @@ package com.unicauca.modelo.implementaciones;
 
 import com.unicauca.modelo.ejbs.productos.TblProductoFacade;
 import com.unicauca.accesodatos.entidades.Producto;
+import com.unicauca.modelo.ejbs.productos.TblCategoriaFacade;
+import com.unicauca.modelo.ejbs.productos.TblIngredienteFacade;
+import com.unicauca.modelo.ejbs.productos.TblIngredienteProductoFacade;
 import com.unicauca.modelo.interfaces.ProductosFacadeLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -20,6 +23,12 @@ public class ProductosFacadeLocalImpl implements ProductosFacadeLocal{
     
     @EJB
     private TblProductoFacade productoFacade;
+    @EJB
+    private TblIngredienteFacade ingredienteFacade;
+    @EJB
+    private TblIngredienteProductoFacade ingredienteProductoFacade;
+    @EJB
+    private TblCategoriaFacade categoriaFacade;
 
     @Override
     public boolean hayUnidadesDisponiblesDe(Long idProducto) {

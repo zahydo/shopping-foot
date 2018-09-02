@@ -6,20 +6,29 @@
 package com.unicauca.modelo.implementaciones;
 
 import com.unicauca.accesodatos.entidades.Usuario;
+import com.unicauca.modelo.ejbs.usuarios.TblPermisoFacade;
+import com.unicauca.modelo.ejbs.usuarios.TblPermisoUsuarioFacade;
+import com.unicauca.modelo.ejbs.usuarios.TblRolFacade;
 import com.unicauca.modelo.ejbs.usuarios.TblUsuarioFacade;
-import com.unicauca.modelo.interfaces.UsuarioFacadeLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import com.unicauca.modelo.interfaces.UsuariosFacadeLocal;
 
 /**
  *
  * @author sahydo
  */
 @Stateless
-public class UsurioFacadeLocalImpl implements UsuarioFacadeLocal {
+public class UsuariosFacadeLocalImpl implements UsuariosFacadeLocal {
 
     @EJB
     private TblUsuarioFacade usuarioFacade;
+    @EJB
+    private TblPermisoFacade permisoFacade;
+    @EJB
+    private TblRolFacade rolFacade;
+    @EJB
+    private TblPermisoUsuarioFacade permisoUsuarioFacade;
 
     @Override
     public Usuario inicarSesion(Usuario user) {

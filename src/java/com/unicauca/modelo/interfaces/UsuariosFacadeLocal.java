@@ -11,6 +11,6 @@ import com.unicauca.accesodatos.entidades.Usuario;
  *
  * @author sahydo
  */
-public interface UsuarioFacadeLocal {
+public interface UsuariosFacadeLocal {
     Usuario inicarSesion(Usuario user);
 }

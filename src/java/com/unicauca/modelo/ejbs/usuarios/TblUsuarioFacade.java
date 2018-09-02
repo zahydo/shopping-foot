@@ -6,13 +6,13 @@
 package com.unicauca.modelo.ejbs.usuarios;
 
 import com.unicauca.modelo.ejbs.AbstractFacade;
-import com.unicauca.modelo.interfaces.UsuarioFacadeLocal;
 import com.unicauca.accesodatos.entidades.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import com.unicauca.modelo.interfaces.UsuariosFacadeLocal;
 
 /**
  *
