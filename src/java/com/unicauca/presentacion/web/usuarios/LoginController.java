@@ -2,8 +2,8 @@ package com.unicauca.presentacion.web.usuarios;
 
 import com.unicauca.accesodatos.entidades.Usuario;
 import com.unicauca.accesodatos.entidades.util.CodigosUtil;
-import com.unicauca.presentacion.web.util.EncrypterUtil;
-import com.unicauca.presentacion.web.util.SessionUtils;
+import com.unicauca.presentacion.util.EncrypterUtil;
+import com.unicauca.presentacion.util.SessionUtils;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;

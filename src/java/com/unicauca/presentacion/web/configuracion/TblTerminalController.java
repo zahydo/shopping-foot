@@ -2,8 +2,8 @@ package com.unicauca.presentacion.web.configuracion;
 
 import com.unicauca.accesodatos.entidades.Terminal;
 import com.unicauca.modelo.ejbs.configuracion.TblTerminalFacade;
-import com.unicauca.presentacion.web.util.JsfUtil;
-import com.unicauca.presentacion.web.util.JsfUtil.PersistAction;
+import com.unicauca.presentacion.util.JsfUtil;
+import com.unicauca.presentacion.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
 import java.util.List;

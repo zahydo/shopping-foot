@@ -2,8 +2,8 @@ package com.unicauca.presentacion.web.configuracion;
 
 import com.unicauca.accesodatos.entidades.Estado;
 import com.unicauca.modelo.ejbs.configuracion.TblEstadoFacade;
-import com.unicauca.presentacion.web.util.JsfUtil;
-import com.unicauca.presentacion.web.util.JsfUtil.PersistAction;
+import com.unicauca.presentacion.util.JsfUtil;
+import com.unicauca.presentacion.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
 import java.util.List;

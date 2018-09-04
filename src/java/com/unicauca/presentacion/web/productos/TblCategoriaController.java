@@ -1,8 +1,8 @@
 package com.unicauca.presentacion.web.productos;
 
 import com.unicauca.accesodatos.entidades.Categoria;
-import com.unicauca.presentacion.web.util.JsfUtil;
-import com.unicauca.presentacion.web.util.JsfUtil.PersistAction;
+import com.unicauca.presentacion.util.JsfUtil;
+import com.unicauca.presentacion.util.JsfUtil.PersistAction;
 import com.unicauca.modelo.ejbs.productos.TblCategoriaFacade;
 
 import java.io.Serializable;

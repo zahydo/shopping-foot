@@ -2,8 +2,8 @@ package com.unicauca.presentacion.web.usuarios;
 
 import com.unicauca.modelo.ejbs.usuarios.TblRolFacade;
 import com.unicauca.accesodatos.entidades.Rol;
-import com.unicauca.presentacion.web.util.JsfUtil;
-import com.unicauca.presentacion.web.util.JsfUtil.PersistAction;
+import com.unicauca.presentacion.util.JsfUtil;
+import com.unicauca.presentacion.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
 import java.util.List;

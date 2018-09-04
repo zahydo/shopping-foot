@@ -1,8 +1,8 @@
 package com.unicauca.presentacion.web.pedidos;
 
 import com.unicauca.accesodatos.entidades.Cliente;
-import com.unicauca.presentacion.web.util.JsfUtil;
-import com.unicauca.presentacion.web.util.JsfUtil.PersistAction;
+import com.unicauca.presentacion.util.JsfUtil;
+import com.unicauca.presentacion.util.JsfUtil.PersistAction;
 import com.unicauca.modelo.ejbs.pedidos.TblClienteFacade;
 
 import java.io.Serializable;

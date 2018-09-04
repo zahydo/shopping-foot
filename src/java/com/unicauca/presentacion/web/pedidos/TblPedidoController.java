@@ -1,9 +1,9 @@
 package com.unicauca.presentacion.web.pedidos;
 
 import com.unicauca.accesodatos.entidades.Pedido;
-import com.unicauca.presentacion.web.util.JsfUtil;
-import com.unicauca.presentacion.web.util.JsfUtil.PersistAction;
-import com.unicauca.presentacion.web.util.SessionUtils;
+import com.unicauca.presentacion.util.JsfUtil;
+import com.unicauca.presentacion.util.JsfUtil.PersistAction;
+import com.unicauca.presentacion.util.SessionUtils;
 
 import java.io.Serializable;
 import java.util.List;

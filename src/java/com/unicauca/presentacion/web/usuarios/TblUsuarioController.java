@@ -1,10 +1,10 @@
 package com.unicauca.presentacion.web.usuarios;
 
 import com.unicauca.accesodatos.entidades.Usuario;
-import com.unicauca.presentacion.web.util.JsfUtil;
-import com.unicauca.presentacion.web.util.JsfUtil.PersistAction;
+import com.unicauca.presentacion.util.JsfUtil;
+import com.unicauca.presentacion.util.JsfUtil.PersistAction;
 import com.unicauca.modelo.ejbs.usuarios.TblUsuarioFacade;
-import com.unicauca.presentacion.web.util.EncrypterUtil;
+import com.unicauca.presentacion.util.EncrypterUtil;
 
 import java.io.Serializable;
 import java.util.List;

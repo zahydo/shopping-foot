@@ -1,8 +1,8 @@
 package com.unicauca.presentacion.web.tienda;
 
 import com.unicauca.accesodatos.entidades.Tienda;
-import com.unicauca.presentacion.web.util.JsfUtil;
-import com.unicauca.presentacion.web.util.JsfUtil.PersistAction;
+import com.unicauca.presentacion.util.JsfUtil;
+import com.unicauca.presentacion.util.JsfUtil.PersistAction;
 import com.unicauca.modelo.ejbs.tienda.TblTiendaFacade;
 
 import java.io.Serializable;

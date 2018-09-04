@@ -1,4 +1,4 @@
-package com.unicauca.presentacion.web.util;
+package com.unicauca.presentacion.util;
 
 import com.unicauca.accesodatos.entidades.Usuario;
 import javax.faces.context.FacesContext;
