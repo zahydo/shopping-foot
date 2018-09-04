@@ -9,11 +9,13 @@ import com.unicauca.modelo.ejbs.configuracion.TblEstadoFacade;
 import com.unicauca.modelo.ejbs.configuracion.TblTerminalFacade;
 import com.unicauca.modelo.interfaces.ConfiguracionFacadeLocal;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author sahydo
  */
+@Stateless
 public class ConfiguracionFacadeLocalImpl implements ConfiguracionFacadeLocal{
     @EJB
     private TblEstadoFacade estadoFacade;

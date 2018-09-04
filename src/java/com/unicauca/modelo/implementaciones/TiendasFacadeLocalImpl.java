@@ -9,11 +9,13 @@ import com.unicauca.modelo.ejbs.tienda.TblProductoTiendaFacade;
 import com.unicauca.modelo.ejbs.tienda.TblTiendaFacade;
 import javax.ejb.EJB;
 import com.unicauca.modelo.interfaces.TiendasFacadeLocal;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author sahydo
  */
+@Stateless
 public class TiendasFacadeLocalImpl implements TiendasFacadeLocal{
     @EJB
     private TblTiendaFacade tiendaFacade;
