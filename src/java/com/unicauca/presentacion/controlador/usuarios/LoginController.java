@@ -1,4 +1,4 @@
-package com.unicauca.presentacion.web.usuarios;
+package com.unicauca.presentacion.controlador.usuarios;
 
 import com.unicauca.accesodatos.entidades.Usuario;
 import com.unicauca.accesodatos.entidades.util.CodigosUtil;

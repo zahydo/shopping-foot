@@ -1,9 +1,9 @@
-package com.unicauca.presentacion.web.tienda;
+package com.unicauca.presentacion.controlador.configuracion;
 
-import com.unicauca.accesodatos.entidades.Tienda;
+import com.unicauca.accesodatos.entidades.Estado;
+import com.unicauca.modelo.ejbs.configuracion.TblEstadoFacade;
 import com.unicauca.presentacion.util.JsfUtil;
 import com.unicauca.presentacion.util.JsfUtil.PersistAction;
-import com.unicauca.modelo.ejbs.tienda.TblTiendaFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("tblTiendaController")
+@Named("tblEstadoController")
 @ApplicationScoped
-public class TblTiendaController implements Serializable {
+public class TblEstadoController implements Serializable {
 
     @EJB
-    private com.unicauca.modelo.ejbs.tienda.TblTiendaFacade ejbFacade;
-    private List<Tienda> items = null;
-    private Tienda selected;
+    private com.unicauca.modelo.ejbs.configuracion.TblEstadoFacade ejbFacade;
+    private List<Estado> items = null;
+    private Estado selected;
 
-    public TblTiendaController() {
+    public TblEstadoController() {
     }
 
-    public Tienda getSelected() {
+    public Estado getSelected() {
         return selected;
     }
 
-    public void setSelected(Tienda selected) {
+    public void setSelected(Estado selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class TblTiendaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TblTiendaFacade getFacade() {
+    private TblEstadoFacade getFacade() {
         return ejbFacade;
     }
 
-    public Tienda prepareCreate() {
-        selected = new Tienda();
+    public Estado prepareCreate() {
+        selected = new Estado();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTiendaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblEstadoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTiendaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblEstadoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTiendaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleRecursos").getString("TblEstadoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Tienda> getItems() {
+    public List<Estado> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,29 +109,29 @@ public class TblTiendaController implements Serializable {
         }
     }
 
-    public Tienda getTblTienda(Long id) {
+    public Estado getTblEstado(Long id) {
         return getFacade().find(id);
     }
 
-    public List<Tienda> getItemsAvailableSelectMany() {
+    public List<Estado> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Tienda> getItemsAvailableSelectOne() {
+    public List<Estado> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Tienda.class)
-    public static class TblTiendaControllerConverter implements Converter {
+    @FacesConverter(forClass = Estado.class)
+    public static class TblEstadoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TblTiendaController controller = (TblTiendaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tblTiendaController");
-            return controller.getTblTienda(getKey(value));
+            TblEstadoController controller = (TblEstadoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tblEstadoController");
+            return controller.getTblEstado(getKey(value));
         }
 
         Long getKey(String value) {
@@ -151,11 +151,11 @@ public class TblTiendaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Tienda) {
-                Tienda o = (Tienda) object;
-                return getStringKey(o.getIdTienda());
+            if (object instanceof Estado) {
+                Estado o = (Estado) object;
+                return getStringKey(o.getIdEstado());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Tienda.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Estado.class.getName()});
                 return null;
             }
         }

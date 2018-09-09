@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.presentacion.web.usuarios;
+package com.unicauca.presentacion.controlador.usuarios;
 
 import com.unicauca.accesodatos.entidades.Usuario;
 import java.io.IOException;

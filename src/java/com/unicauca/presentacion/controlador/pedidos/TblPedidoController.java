@@ -1,4 +1,4 @@
-package com.unicauca.presentacion.web.pedidos;
+package com.unicauca.presentacion.controlador.pedidos;
 
 import com.unicauca.accesodatos.entidades.Pedido;
 import com.unicauca.presentacion.util.JsfUtil;

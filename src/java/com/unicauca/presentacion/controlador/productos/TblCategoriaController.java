@@ -1,9 +1,9 @@
-package com.unicauca.presentacion.web.productos;
+package com.unicauca.presentacion.controlador.productos;
 
-import com.unicauca.accesodatos.entidades.Ingrediente;
+import com.unicauca.accesodatos.entidades.Categoria;
 import com.unicauca.presentacion.util.JsfUtil;
 import com.unicauca.presentacion.util.JsfUtil.PersistAction;
-import com.unicauca.modelo.ejbs.productos.TblIngredienteFacade;
+import com.unicauca.modelo.ejbs.productos.TblCategoriaFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,24 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("tblIngredienteController")
+
+@Named("tblCategoriaController")
 @ApplicationScoped
-public class TblIngredienteController implements Serializable {
+public class TblCategoriaController implements Serializable {
 
-    @EJB
-    private com.unicauca.modelo.ejbs.productos.TblIngredienteFacade ejbFacade;
-    private List<Ingrediente> items = null;
-    private Ingrediente selected;
 
-    public TblIngredienteController() {
+    @EJB private com.unicauca.modelo.ejbs.productos.TblCategoriaFacade ejbFacade;
+    private List<Categoria> items = null;
+    private Categoria selected;
+
+    public TblCategoriaController() {
     }
 
-    public Ingrediente getSelected() {
+    public Categoria getSelected() {
         return selected;
     }
 
-    public void setSelected(Ingrediente selected) {
+    public void setSelected(Categoria selected) {
         this.selected = selected;
     }
 
@@ -45,36 +46,36 @@ public class TblIngredienteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TblIngredienteFacade getFacade() {
+    private TblCategoriaFacade getFacade() {
         return ejbFacade;
     }
 
-    public Ingrediente prepareCreate() {
-        selected = new Ingrediente();
+    public Categoria prepareCreate() {
+        selected = new Categoria();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblCategoriaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblCategoriaUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblCategoriaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Ingrediente> getItems() {
+    public List<Categoria> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,29 +110,29 @@ public class TblIngredienteController implements Serializable {
         }
     }
 
-    public Ingrediente getTblIngrediente(Long id) {
+    public Categoria getTblCategoria(Long id) {
         return getFacade().find(id);
     }
 
-    public List<Ingrediente> getItemsAvailableSelectMany() {
+    public List<Categoria> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Ingrediente> getItemsAvailableSelectOne() {
+    public List<Categoria> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Ingrediente.class)
-    public static class TblIngredienteControllerConverter implements Converter {
+    @FacesConverter(forClass=Categoria.class)
+    public static class TblCategoriaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TblIngredienteController controller = (TblIngredienteController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tblIngredienteController");
-            return controller.getTblIngrediente(getKey(value));
+            TblCategoriaController controller = (TblCategoriaController)facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tblCategoriaController");
+            return controller.getTblCategoria(getKey(value));
         }
 
         Long getKey(String value) {
@@ -151,11 +152,11 @@ public class TblIngredienteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Ingrediente) {
-                Ingrediente o = (Ingrediente) object;
-                return getStringKey(o.getIdIngrediente());
+            if (object instanceof Categoria) {
+                Categoria o = (Categoria) object;
+                return getStringKey(o.getIdCategoria());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Ingrediente.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Categoria.class.getName()});
                 return null;
             }
         }

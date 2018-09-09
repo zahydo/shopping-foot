@@ -1,9 +1,9 @@
-package com.unicauca.presentacion.web.pedidos;
+package com.unicauca.presentacion.controlador.tienda;
 
-import com.unicauca.accesodatos.entidades.Cliente;
+import com.unicauca.accesodatos.entidades.Tienda;
 import com.unicauca.presentacion.util.JsfUtil;
 import com.unicauca.presentacion.util.JsfUtil.PersistAction;
-import com.unicauca.modelo.ejbs.pedidos.TblClienteFacade;
+import com.unicauca.modelo.ejbs.tienda.TblTiendaFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("tblClienteController")
+@Named("tblTiendaController")
 @ApplicationScoped
-public class TblClienteController implements Serializable {
+public class TblTiendaController implements Serializable {
 
     @EJB
-    private com.unicauca.modelo.ejbs.pedidos.TblClienteFacade ejbFacade;
-    private List<Cliente> items = null;
-    private Cliente selected;
+    private com.unicauca.modelo.ejbs.tienda.TblTiendaFacade ejbFacade;
+    private List<Tienda> items = null;
+    private Tienda selected;
 
-    public TblClienteController() {
+    public TblTiendaController() {
     }
 
-    public Cliente getSelected() {
+    public Tienda getSelected() {
         return selected;
     }
 
-    public void setSelected(Cliente selected) {
+    public void setSelected(Tienda selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class TblClienteController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TblClienteFacade getFacade() {
+    private TblTiendaFacade getFacade() {
         return ejbFacade;
     }
 
-    public Cliente prepareCreate() {
-        selected = new Cliente();
+    public Tienda prepareCreate() {
+        selected = new Tienda();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePedidos").getString("TblClienteCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTiendaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePedidos").getString("TblClienteUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTiendaUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePedidos").getString("TblClienteDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTiendaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Cliente> getItems() {
+    public List<Tienda> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -100,38 +100,38 @@ public class TblClienteController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundlePedidos").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRecursos").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundlePedidos").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRecursos").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public Cliente getTblCliente(Long id) {
+    public Tienda getTblTienda(Long id) {
         return getFacade().find(id);
     }
 
-    public List<Cliente> getItemsAvailableSelectMany() {
+    public List<Tienda> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Cliente> getItemsAvailableSelectOne() {
+    public List<Tienda> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Cliente.class)
-    public static class TblClienteControllerConverter implements Converter {
+    @FacesConverter(forClass = Tienda.class)
+    public static class TblTiendaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TblClienteController controller = (TblClienteController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tblClienteController");
-            return controller.getTblCliente(getKey(value));
+            TblTiendaController controller = (TblTiendaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tblTiendaController");
+            return controller.getTblTienda(getKey(value));
         }
 
         Long getKey(String value) {
@@ -151,11 +151,11 @@ public class TblClienteController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Cliente) {
-                Cliente o = (Cliente) object;
-                return getStringKey(o.getIdCliente());
+            if (object instanceof Tienda) {
+                Tienda o = (Tienda) object;
+                return getStringKey(o.getIdTienda());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Cliente.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Tienda.class.getName()});
                 return null;
             }
         }

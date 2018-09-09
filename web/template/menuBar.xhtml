@@ -12,33 +12,33 @@ and open the template in the editor.
         <h:form id="menuForm">
                 <p:panelMenu>
                     <p:submenu label="#{bundle.Configuracion}" rendered="#{loginController.administrador or loginController.configurador}">
-                        <p:menuitem value="Gestión de Estados" outcome="/shoppingView/recursos/tblEstado/List.xhtml" />
-                        <p:menuitem value="Gestión de Terminales" outcome="/shoppingView/recursos/tblTerminal/List.xhtml" />
+                        <p:menuitem value="Gestión de Estados" outcome="/presentacion/vista/recursos/tblEstado/List.xhtml" />
+                        <p:menuitem value="Gestión de Terminales" outcome="/presentacion/vista/recursos/tblTerminal/List.xhtml" />
                     </p:submenu>
                     <p:separator rendered="#{loginController.administrador or loginController.configurador}"/>
                     <p:submenu label="#{bundle.Pedidos}" rendered="#{loginController.cajero or loginController.mesero or loginController.despachador or loginController.cocinero}">
-                        <p:menuitem rendered="#{loginController.cajero}" value="Gestión de Clientes" outcome="/shoppingView/pedidos/tblCliente/List.xhtml" />
-                        <p:menuitem value="Gestión de Pedidos" outcome="/shoppingView/pedidos/tblPedido/List.xhtml" />
-                        <p:menuitem rendered="#{loginController.cajero}" value="Asignación de pedidos" outcome="/shoppingView/pedidos/asignacion.xhtml" />
+                        <p:menuitem rendered="#{loginController.cajero}" value="Gestión de Clientes" outcome="/presentacion/vista/pedidos/tblCliente/List.xhtml" />
+                        <p:menuitem value="Gestión de Pedidos" outcome="/presentacion/vista/pedidos/tblPedido/List.xhtml" />
+                        <p:menuitem rendered="#{loginController.cajero}" value="Asignación de pedidos" outcome="/presentacion/vista/pedidos/asignacion.xhtml" />
                     </p:submenu>
                     <p:separator rendered="#{loginController.cajero or loginController.mesero or loginController.despachador}" />
                     <p:submenu label="#{bundle.Productos}" rendered="#{loginController.cocinero or loginController.configurador}">
-                        <p:menuitem value="Categorías de productos" outcome="/shoppingView/productos/tblCategoria/List.xhtml" />
-                        <p:menuitem value="Gestión de Productos" outcome="/shoppingView/productos/tblProducto/List.xhtml" />
-                        <p:menuitem value="Gestión de Ingredientes" outcome="/shoppingView/productos/tblIngrediente/List.xhtml" />
-                        <p:menuitem value="Preparación de productos" outcome="/shoppingView/productos/tblIngredienteProducto/List.xhtml" />
+                        <p:menuitem value="Categorías de productos" outcome="/presentacion/vista/productos/tblCategoria/List.xhtml" />
+                        <p:menuitem value="Gestión de Productos" outcome="/presentacion/vista/productos/tblProducto/List.xhtml" />
+                        <p:menuitem value="Gestión de Ingredientes" outcome="/presentacion/vista/productos/tblIngrediente/List.xhtml" />
+                        <p:menuitem value="Preparación de productos" outcome="/presentacion/vista/productos/tblIngredienteProducto/List.xhtml" />
                     </p:submenu>
                     <p:separator rendered="#{loginController.cocinero or loginController.configurador}" />
                     <p:submenu label="#{bundle.Tienda}" rendered="#{loginController.administrador or loginController.configurador}">
-                        <p:menuitem value="Gestionar Tiendas" outcome="/shoppingView/tienda/tblTienda/List.xhtml" />
-                        <p:menuitem value="Inventario de tiendas" outcome="/shoppingView/tienda/tblProductoTienda/List.xhtml" />
+                        <p:menuitem value="Gestionar Tiendas" outcome="/presentacion/vista/tienda/tblTienda/List.xhtml" />
+                        <p:menuitem value="Inventario de tiendas" outcome="/presentacion/vista/tienda/tblProductoTienda/List.xhtml" />
                     </p:submenu>
                     <p:separator rendered="#{loginController.administrador or loginController.configurador}"/>
                     <p:submenu label="#{bundle.Usuarios}" rendered="#{loginController.administrador}">
-                        <p:menuitem value="Gestión de Permisos" outcome="/shoppingView/usuarios/tblPermiso/List.xhtml" />
-                        <p:menuitem value="Gestión de Roles" outcome="/shoppingView/usuarios/tblRol/List.xhtml" />
-                        <p:menuitem value="Gestión de Usuarios" outcome="/shoppingView/usuarios/tblUsuario/List.xhtml" />
-                        <p:menuitem value="Permisos por usuario" outcome="/shoppingView/usuarios/tblPermisoUsuario/List.xhtml" />
+                        <p:menuitem value="Gestión de Permisos" outcome="/presentacion/vista/usuarios/tblPermiso/List.xhtml" />
+                        <p:menuitem value="Gestión de Roles" outcome="/presentacion/vista/usuarios/tblRol/List.xhtml" />
+                        <p:menuitem value="Gestión de Usuarios" outcome="/presentacion/vista/usuarios/tblUsuario/List.xhtml" />
+                        <p:menuitem value="Permisos por usuario" outcome="/presentacion/vista/usuarios/tblPermisoUsuario/List.xhtml" />
                     </p:submenu>
                 </p:panelMenu>
             </h:form>

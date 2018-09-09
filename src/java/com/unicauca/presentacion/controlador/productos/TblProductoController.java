@@ -1,9 +1,9 @@
-package com.unicauca.presentacion.web.usuarios;
+package com.unicauca.presentacion.controlador.productos;
 
-import com.unicauca.modelo.ejbs.usuarios.TblRolFacade;
-import com.unicauca.accesodatos.entidades.Rol;
+import com.unicauca.accesodatos.entidades.Producto;
 import com.unicauca.presentacion.util.JsfUtil;
 import com.unicauca.presentacion.util.JsfUtil.PersistAction;
+import com.unicauca.modelo.ejbs.productos.TblProductoFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,24 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("tblRolController")
+
+@Named("tblProductoController")
 @ApplicationScoped
-public class TblRolController implements Serializable {
+public class TblProductoController implements Serializable {
 
-    @EJB
-    private com.unicauca.modelo.ejbs.usuarios.TblRolFacade ejbFacade;
-    private List<Rol> items = null;
-    private Rol selected;
 
-    public TblRolController() {
+    @EJB private com.unicauca.modelo.ejbs.productos.TblProductoFacade ejbFacade;
+    private List<Producto> items = null;
+    private Producto selected;
+
+    public TblProductoController() {
     }
 
-    public Rol getSelected() {
+    public Producto getSelected() {
         return selected;
     }
 
-    public void setSelected(Rol selected) {
+    public void setSelected(Producto selected) {
         this.selected = selected;
     }
 
@@ -45,36 +46,36 @@ public class TblRolController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TblRolFacade getFacade() {
+    private TblProductoFacade getFacade() {
         return ejbFacade;
     }
 
-    public Rol prepareCreate() {
-        selected = new Rol();
+    public Producto prepareCreate() {
+        selected = new Producto();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleRolPermisos").getString("TblRolCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblProductoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleRolPermisos").getString("TblRolUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblProductoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleRolPermisos").getString("TblRolDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblProductoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Rol> getItems() {
+    public List<Producto> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -100,38 +101,38 @@ public class TblRolController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRolPermisos").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRolPermisos").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public Rol getTblRol(Long id) {
+    public Producto getTblProducto(Long id) {
         return getFacade().find(id);
     }
 
-    public List<Rol> getItemsAvailableSelectMany() {
+    public List<Producto> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Rol> getItemsAvailableSelectOne() {
+    public List<Producto> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Rol.class)
-    public static class TblRolControllerConverter implements Converter {
+    @FacesConverter(forClass=Producto.class)
+    public static class TblProductoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TblRolController controller = (TblRolController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tblRolController");
-            return controller.getTblRol(getKey(value));
+            TblProductoController controller = (TblProductoController)facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tblProductoController");
+            return controller.getTblProducto(getKey(value));
         }
 
         Long getKey(String value) {
@@ -151,11 +152,11 @@ public class TblRolController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Rol) {
-                Rol o = (Rol) object;
-                return getStringKey(o.getIdRol());
+            if (object instanceof Producto) {
+                Producto o = (Producto) object;
+                return getStringKey(o.getIdProducto());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Rol.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Producto.class.getName()});
                 return null;
             }
         }

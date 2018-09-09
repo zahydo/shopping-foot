@@ -1,9 +1,9 @@
-package com.unicauca.presentacion.web.productos;
+package com.unicauca.presentacion.controlador.usuarios;
 
-import com.unicauca.accesodatos.entidades.IngredienteProducto;
+import com.unicauca.modelo.ejbs.usuarios.TblPermisoFacade;
+import com.unicauca.accesodatos.entidades.Permiso;
 import com.unicauca.presentacion.util.JsfUtil;
 import com.unicauca.presentacion.util.JsfUtil.PersistAction;
-import com.unicauca.modelo.ejbs.productos.TblIngredienteProductoFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("tblIngredienteProductoController")
+@Named("tblPermisoController")
 @ApplicationScoped
-public class TblIngredienteProductoController implements Serializable {
+public class TblPermisoController implements Serializable {
 
     @EJB
-    private com.unicauca.modelo.ejbs.productos.TblIngredienteProductoFacade ejbFacade;
-    private List<IngredienteProducto> items = null;
-    private IngredienteProducto selected;
+    private com.unicauca.modelo.ejbs.usuarios.TblPermisoFacade ejbFacade;
+    private List<Permiso> items = null;
+    private Permiso selected;
 
-    public TblIngredienteProductoController() {
+    public TblPermisoController() {
     }
 
-    public IngredienteProducto getSelected() {
+    public Permiso getSelected() {
         return selected;
     }
 
-    public void setSelected(IngredienteProducto selected) {
+    public void setSelected(Permiso selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class TblIngredienteProductoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TblIngredienteProductoFacade getFacade() {
+    private TblPermisoFacade getFacade() {
         return ejbFacade;
     }
 
-    public IngredienteProducto prepareCreate() {
-        selected = new IngredienteProducto();
+    public Permiso prepareCreate() {
+        selected = new Permiso();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteProductoCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleRolPermisos").getString("TblPermisoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteProductoUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleRolPermisos").getString("TblPermisoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteProductoDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleRolPermisos").getString("TblPermisoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<IngredienteProducto> getItems() {
+    public List<Permiso> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -100,38 +100,38 @@ public class TblIngredienteProductoController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRolPermisos").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRolPermisos").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public IngredienteProducto getTblIngredienteProducto(Long id) {
+    public Permiso getTblPermiso(Long id) {
         return getFacade().find(id);
     }
 
-    public List<IngredienteProducto> getItemsAvailableSelectMany() {
+    public List<Permiso> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<IngredienteProducto> getItemsAvailableSelectOne() {
+    public List<Permiso> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = IngredienteProducto.class)
-    public static class TblIngredienteProductoControllerConverter implements Converter {
+    @FacesConverter(forClass = Permiso.class)
+    public static class TblPermisoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TblIngredienteProductoController controller = (TblIngredienteProductoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tblIngredienteProductoController");
-            return controller.getTblIngredienteProducto(getKey(value));
+            TblPermisoController controller = (TblPermisoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tblPermisoController");
+            return controller.getTblPermiso(getKey(value));
         }
 
         Long getKey(String value) {
@@ -151,11 +151,11 @@ public class TblIngredienteProductoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof IngredienteProducto) {
-                IngredienteProducto o = (IngredienteProducto) object;
-                return getStringKey(o.getIdIngredienteProducto());
+            if (object instanceof Permiso) {
+                Permiso o = (Permiso) object;
+                return getStringKey(o.getIdPermiso());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), IngredienteProducto.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Permiso.class.getName()});
                 return null;
             }
         }

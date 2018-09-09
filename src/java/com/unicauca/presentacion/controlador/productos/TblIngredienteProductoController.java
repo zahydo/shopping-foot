@@ -1,9 +1,9 @@
-package com.unicauca.presentacion.web.configuracion;
+package com.unicauca.presentacion.controlador.productos;
 
-import com.unicauca.accesodatos.entidades.Estado;
-import com.unicauca.modelo.ejbs.configuracion.TblEstadoFacade;
+import com.unicauca.accesodatos.entidades.IngredienteProducto;
 import com.unicauca.presentacion.util.JsfUtil;
 import com.unicauca.presentacion.util.JsfUtil.PersistAction;
+import com.unicauca.modelo.ejbs.productos.TblIngredienteProductoFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("tblEstadoController")
+@Named("tblIngredienteProductoController")
 @ApplicationScoped
-public class TblEstadoController implements Serializable {
+public class TblIngredienteProductoController implements Serializable {
 
     @EJB
-    private com.unicauca.modelo.ejbs.configuracion.TblEstadoFacade ejbFacade;
-    private List<Estado> items = null;
-    private Estado selected;
+    private com.unicauca.modelo.ejbs.productos.TblIngredienteProductoFacade ejbFacade;
+    private List<IngredienteProducto> items = null;
+    private IngredienteProducto selected;
 
-    public TblEstadoController() {
+    public TblIngredienteProductoController() {
     }
 
-    public Estado getSelected() {
+    public IngredienteProducto getSelected() {
         return selected;
     }
 
-    public void setSelected(Estado selected) {
+    public void setSelected(IngredienteProducto selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class TblEstadoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TblEstadoFacade getFacade() {
+    private TblIngredienteProductoFacade getFacade() {
         return ejbFacade;
     }
 
-    public Estado prepareCreate() {
-        selected = new Estado();
+    public IngredienteProducto prepareCreate() {
+        selected = new IngredienteProducto();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblEstadoCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteProductoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblEstadoUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteProductoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleRecursos").getString("TblEstadoDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblIngredienteProductoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Estado> getItems() {
+    public List<IngredienteProducto> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -100,38 +100,38 @@ public class TblEstadoController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRecursos").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRecursos").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public Estado getTblEstado(Long id) {
+    public IngredienteProducto getTblIngredienteProducto(Long id) {
         return getFacade().find(id);
     }
 
-    public List<Estado> getItemsAvailableSelectMany() {
+    public List<IngredienteProducto> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Estado> getItemsAvailableSelectOne() {
+    public List<IngredienteProducto> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Estado.class)
-    public static class TblEstadoControllerConverter implements Converter {
+    @FacesConverter(forClass = IngredienteProducto.class)
+    public static class TblIngredienteProductoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TblEstadoController controller = (TblEstadoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tblEstadoController");
-            return controller.getTblEstado(getKey(value));
+            TblIngredienteProductoController controller = (TblIngredienteProductoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tblIngredienteProductoController");
+            return controller.getTblIngredienteProducto(getKey(value));
         }
 
         Long getKey(String value) {
@@ -151,11 +151,11 @@ public class TblEstadoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Estado) {
-                Estado o = (Estado) object;
-                return getStringKey(o.getIdEstado());
+            if (object instanceof IngredienteProducto) {
+                IngredienteProducto o = (IngredienteProducto) object;
+                return getStringKey(o.getIdIngredienteProducto());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Estado.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), IngredienteProducto.class.getName()});
                 return null;
             }
         }

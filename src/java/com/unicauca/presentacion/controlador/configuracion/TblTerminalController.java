@@ -1,9 +1,9 @@
-package com.unicauca.presentacion.web.productos;
+package com.unicauca.presentacion.controlador.configuracion;
 
-import com.unicauca.accesodatos.entidades.Categoria;
+import com.unicauca.accesodatos.entidades.Terminal;
+import com.unicauca.modelo.ejbs.configuracion.TblTerminalFacade;
 import com.unicauca.presentacion.util.JsfUtil;
 import com.unicauca.presentacion.util.JsfUtil.PersistAction;
-import com.unicauca.modelo.ejbs.productos.TblCategoriaFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,24 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-
-@Named("tblCategoriaController")
+@Named("tblTerminalController")
 @ApplicationScoped
-public class TblCategoriaController implements Serializable {
+public class TblTerminalController implements Serializable {
 
+    @EJB
+    private com.unicauca.modelo.ejbs.configuracion.TblTerminalFacade ejbFacade;
+    private List<Terminal> items = null;
+    private Terminal selected;
 
-    @EJB private com.unicauca.modelo.ejbs.productos.TblCategoriaFacade ejbFacade;
-    private List<Categoria> items = null;
-    private Categoria selected;
-
-    public TblCategoriaController() {
+    public TblTerminalController() {
     }
 
-    public Categoria getSelected() {
+    public Terminal getSelected() {
         return selected;
     }
 
-    public void setSelected(Categoria selected) {
+    public void setSelected(Terminal selected) {
         this.selected = selected;
     }
 
@@ -46,36 +45,36 @@ public class TblCategoriaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TblCategoriaFacade getFacade() {
+    private TblTerminalFacade getFacade() {
         return ejbFacade;
     }
 
-    public Categoria prepareCreate() {
-        selected = new Categoria();
+    public Terminal prepareCreate() {
+        selected = new Terminal();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblCategoriaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTerminalCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblCategoriaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTerminalUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("TblCategoriaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleRecursos").getString("TblTerminalDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Categoria> getItems() {
+    public List<Terminal> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -101,38 +100,38 @@ public class TblCategoriaController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRecursos").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngredientesProductos").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleRecursos").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public Categoria getTblCategoria(Long id) {
+    public Terminal getTblTerminal(Long id) {
         return getFacade().find(id);
     }
 
-    public List<Categoria> getItemsAvailableSelectMany() {
+    public List<Terminal> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Categoria> getItemsAvailableSelectOne() {
+    public List<Terminal> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=Categoria.class)
-    public static class TblCategoriaControllerConverter implements Converter {
+    @FacesConverter(forClass = Terminal.class)
+    public static class TblTerminalControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TblCategoriaController controller = (TblCategoriaController)facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tblCategoriaController");
-            return controller.getTblCategoria(getKey(value));
+            TblTerminalController controller = (TblTerminalController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tblTerminalController");
+            return controller.getTblTerminal(getKey(value));
         }
 
         Long getKey(String value) {
@@ -152,11 +151,11 @@ public class TblCategoriaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Categoria) {
-                Categoria o = (Categoria) object;
-                return getStringKey(o.getIdCategoria());
+            if (object instanceof Terminal) {
+                Terminal o = (Terminal) object;
+                return getStringKey(o.getIdTerminal());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Categoria.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Terminal.class.getName()});
                 return null;
             }
         }
